@@ -8,7 +8,9 @@ public class Role {
         private Integer id;
         private String name;
         private String description;
-
+    public Role(){
+        super(); //Satvik added this no arg constructor
+    }
     public Role(String name, String description) {
         this.name = name;
         this.description = description;
