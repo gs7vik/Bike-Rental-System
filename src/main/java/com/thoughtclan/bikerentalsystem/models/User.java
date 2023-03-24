@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,9 @@ public class User {
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
     private List<Role> roles;
+
+    public User(){
+        super();
 
     public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
         this.firstName = firstName;
@@ -78,11 +81,16 @@ public class User {
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }
-    public Collection<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+
     public void setRoles(Collection<Role> roles) {
         this.roles = (List<Role>) roles;
+
     }
 
 }
