@@ -1,24 +1,37 @@
 package com.thoughtclan.bikerentalsystem.models;
 import jakarta.persistence.*;
+
+import java.util.List;
+
 @Entity
 @Table(name="role")
 public class Role {
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
         private Integer id;
+        @Column(name = "name")
         private String name;
+        @Column(name = "description")
         private String description;
+
     public Role(){
         super(); //Satvik added this no arg constructor
     }
     public Role(String name, String description) {
+
+
+
+    public Role(String name, String description,List<privileges> Privileges) {
+
         this.name = name;
         this.description = description;
+        this.Privileges=(List<privileges>) Privileges;
     }
-
+    @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name="role_privileges_mapping",joinColumns=@JoinColumn(name="role_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="privileges_id",referencedColumnName="id"))
+    private List<privileges> Privileges;
     public Integer getId() {
-            return id;
-        }
+            return id;}
         public void setId(Integer id) {
             this.id = id;
         }
