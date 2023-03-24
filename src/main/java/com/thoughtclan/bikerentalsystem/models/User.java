@@ -1,5 +1,7 @@
 package com.thoughtclan.bikerentalsystem.models;
 import java.util.Collection;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,15 +20,15 @@ public class User {
     private String licenseNo;
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
-    private Collection<Role> roles;
+    private List<Role> roles;
 
-    public User(String firstName, String lastName, String email, String password, String licenseNo, Collection<Role> roles) {
+    public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.licenseNo = licenseNo;
-        this.roles = roles;
+        this.roles = (List<Role>) roles;
     }
 
     public Integer getId() {
@@ -80,7 +82,7 @@ public class User {
         return roles;
     }
     public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+        this.roles = (List<Role>) roles;
     }
 
 }
