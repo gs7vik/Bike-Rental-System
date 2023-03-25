@@ -21,16 +21,17 @@ public class User {
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
     private List<Role> roles;
+
     public User(){
         super();
-    }
+
     public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.licenseNo = licenseNo;
-        this.roles = roles;
+        this.roles = (List<Role>) roles;
     }
 
     public Integer getId() {
@@ -83,8 +84,13 @@ public class User {
     public List<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = (List<Role>) roles;
+
     }
 
 }
