@@ -14,14 +14,21 @@ public class Role {
         @Column(name = "description")
         private String description;
 
+
+    public Role(String name) {
+      this.name=name;
+
     public Role(){
         super(); //Satvik added this no arg constructor
     }
     public Role(String name, String description) {
-
+        this.name = name;
+        this.description = description;
+        }
 
 
     public Role(String name, String description,List<privileges> Privileges) {
+
 
         this.name = name;
         this.description = description;
