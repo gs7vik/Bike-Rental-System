@@ -3,11 +3,9 @@ package com.thoughtclan.bikerentalsystem.models;
 import java.util.List;
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="user",uniqueConstraints ={ @UniqueConstraint(name="UniqueEmailAndLicenseNo",columnNames={"license_no","email"})})
 
 
-import jakarta.persistence.*;
+
 
 @Entity
 @Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -29,7 +27,7 @@ public class User {
     private List<Role> roles;
 
 
-    public User(){
+    public User() {
         super();
         }
 
@@ -97,10 +95,7 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = (List<Role>) roles;
-
     }
+
 
 }

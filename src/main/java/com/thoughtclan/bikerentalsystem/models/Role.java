@@ -16,10 +16,11 @@ public class Role {
 
 
     public Role(String name) {
-      this.name=name;
+        this.name = name;
+    }
 
     public Role(){
-        super(); //Satvik added this no arg constructor
+        super();
     }
     public Role(String name, String description) {
         this.name = name;
