@@ -32,7 +32,6 @@ public class User {
         }
 
 
-
     public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
