@@ -1,7 +1,7 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 
 import com.thoughtclan.bikerentalsystem.services.UserService;
-import com.thoughtclan.bikerentalsystem.userdto.UserRegistrationDto;
+import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
