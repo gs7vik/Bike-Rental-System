@@ -19,7 +19,9 @@ public class Booking {
     private Integer id;
 
     @ManyToOne( targetEntity = BikeDetails.class )
+
     private BikeDetails bikeDetails;
+
     private Date in_time;
 
     private Date out_time;

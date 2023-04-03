@@ -26,5 +26,4 @@ public class BikeDetails {
     @Column(nullable = false)
     private String is_available;
 
-
 }
