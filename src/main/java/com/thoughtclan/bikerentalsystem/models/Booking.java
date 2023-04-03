@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -22,9 +23,9 @@ public class Booking {
 
     private BikeDetails bikeDetails;
 
-    private Date in_time;
+    private LocalDateTime start_time;
 
-    private Date out_time;
+    private LocalDateTime end_time;
 
     private Double price;
 

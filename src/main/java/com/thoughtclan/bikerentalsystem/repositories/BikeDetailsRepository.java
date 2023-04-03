@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BikeDetailsRepository extends JpaRepository<BikeDetails,Integer> {
+public interface BikeDetailsRepository extends JpaRepository<BikeDetails,Long> {
 
 }

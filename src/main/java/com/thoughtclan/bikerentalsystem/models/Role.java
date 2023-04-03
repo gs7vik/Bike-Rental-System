@@ -8,7 +8,7 @@ import java.util.List;
 public class Role {
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
-        private Integer id;
+        private Long id;
         @Column(name = "name")
         private String name;
         @Column(name = "description")
@@ -38,9 +38,9 @@ public class Role {
     @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="role_privileges_mapping",joinColumns=@JoinColumn(name="role_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="privileges_id",referencedColumnName="id"))
     private List<privileges> Privileges;
-    public Integer getId() {
+    public Long getId() {
             return id;}
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
         public String getName() {
