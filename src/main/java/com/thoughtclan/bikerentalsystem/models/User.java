@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames ={ "email","license_no"}))
 
 public class User {
     @Id
@@ -22,6 +22,8 @@ public class User {
     private String password;
     @Column(name="license_no")
     private String licenseNo;
+    @Column(name="contact_no")
+    private String contactNo;
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
     private List<Role> roles;
@@ -33,12 +35,13 @@ public class User {
 
 
 
-    public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
+    public User(String firstName, String lastName, String email, String password, String licenseNo,String contactNo, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.licenseNo = licenseNo;
+        this.contactNo = contactNo;
         this.roles = (List<Role>) roles;
     }
 
@@ -85,10 +88,17 @@ public class User {
     public String getLicenseNo() {
         return licenseNo;
     }
-
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
