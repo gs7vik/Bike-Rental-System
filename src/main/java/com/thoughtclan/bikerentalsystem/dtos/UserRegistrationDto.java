@@ -1,4 +1,4 @@
-package com.thoughtclan.bikerentalsystem.userdto;
+package com.thoughtclan.bikerentalsystem.dtos;
 
 public class UserRegistrationDto {
     private String firstName;
