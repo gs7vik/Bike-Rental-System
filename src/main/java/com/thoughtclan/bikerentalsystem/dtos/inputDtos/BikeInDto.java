@@ -6,8 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BikeInDto {
-    private Integer id;
+    private Long id;
     private String model;
-    private Double price_per_hour;
+
     private String is_available;
+
+    private Double price_per_hour;
 }

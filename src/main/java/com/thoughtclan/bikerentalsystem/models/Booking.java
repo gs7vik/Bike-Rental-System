@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.*;
 
 @Entity
 @Getter
@@ -17,18 +16,23 @@ import java.util.*;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne( targetEntity = BikeDetails.class )
 
-    private BikeDetails bikeDetails;
+    @ManyToOne( targetEntity = Bike.class )
 
-    private LocalDateTime start_time;
+    private Bike bike;
 
-    private LocalDateTime end_time;
 
-    private Double price;
+    private LocalDateTime startTime;
 
+    private LocalDateTime endTime;
+
+    private Double totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name="user_id",referencedColumnName = "id")
+    private User user;
 
 
 }

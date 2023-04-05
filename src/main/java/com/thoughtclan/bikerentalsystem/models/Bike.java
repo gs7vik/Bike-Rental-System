@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BikeDetails {
+public class Bike {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
