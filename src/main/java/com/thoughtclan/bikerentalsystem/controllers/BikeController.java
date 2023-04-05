@@ -22,7 +22,8 @@ public class BikeController {
     }
 
     @PutMapping("/{id}")
-    public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){return bikeService.updatePrice(id,input);
+    public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
+        return bikeService.updatePrice(id,input);
     }
 
 }
