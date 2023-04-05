@@ -17,10 +17,5 @@ public class UserServiceImpl implements UserService{
         super();
         this.userRepository = userRepository;
     }
-    @Override
-    public User save(UserRegistrationDto registrationDto) {
-        User user=new User(registrationDto.getFirstName(),registrationDto.getLastName(),registrationDto.getEmail(),registrationDto.getPassword(),registrationDto.getLicenseNo(),registrationDto.getContactNo(),Arrays.asList(new Role("ROLE_USER")));
-        return userRepository.save(user);
-    }
 
 }

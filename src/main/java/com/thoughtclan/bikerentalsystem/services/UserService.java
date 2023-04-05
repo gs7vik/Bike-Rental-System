@@ -4,6 +4,4 @@ import com.thoughtclan.bikerentalsystem.models.User;
 import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 
 public interface UserService {
-    User save(UserRegistrationDto registrationDto);
-
 }
