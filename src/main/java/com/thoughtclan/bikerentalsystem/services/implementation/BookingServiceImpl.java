@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class BookingServiceImpl implements BookingService {
 
 
-    private final BikeDetailsRepository bikeDetailsRepository;
+    private final BikeRepository bikeRepository;
 
     private final BookingRepository bookingRepository;
 
@@ -37,7 +37,7 @@ public class BookingServiceImpl implements BookingService {
 
             User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
             booking.setUser(user);
-          Bike bike =bikeDetailsRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
+          Bike bike = bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
            booking.setBike(bike);
 
 
