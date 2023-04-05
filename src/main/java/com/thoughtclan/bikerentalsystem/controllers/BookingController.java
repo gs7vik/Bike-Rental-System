@@ -15,9 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookingController {
 
-
-
-
     private final BookingServiceImpl bookingService;
 
 
@@ -31,8 +28,6 @@ public class BookingController {
     public BookingOutputDto getBookingById(@PathVariable Long id){
         return bookingService.getBooking(id);
     }
-
-
 
 
 }
