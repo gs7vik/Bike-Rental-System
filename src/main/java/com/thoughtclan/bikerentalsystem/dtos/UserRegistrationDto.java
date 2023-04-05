@@ -17,6 +17,9 @@ public class UserRegistrationDto {
         this.licenseNo=licenseNo;
         this.contactNo=contactNo;
     }
+
+
+
     public String getFirstName() {
         return firstName;
     }
