@@ -3,6 +3,7 @@ package com.thoughtclan.bikerentalsystem.models;
 import jakarta.persistence.*;
 
 @Entity
+
 @Table(name="privileges")
 public class privileges {
     @Id
@@ -20,6 +21,7 @@ public class privileges {
         this.description=description;
         this.display_Name=display_Name;
     }
+    public privileges(){}
 
     public String getName() {
         return name;

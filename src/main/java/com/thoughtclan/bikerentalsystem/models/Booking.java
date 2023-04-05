@@ -17,18 +17,24 @@ import java.util.*;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne( targetEntity = BikeDetails.class )
+
+   /* @ManyToOne( targetEntity = BikeDetails.class )
 
     private BikeDetails bikeDetails;
 
-    private LocalDateTime start_time;
+    */
 
-    private LocalDateTime end_time;
+    private LocalDateTime startTime;
 
-    private Double price;
+    private LocalDateTime endTime;
 
+    private Double totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name="user_id",referencedColumnName = "id")
+    private User user;
 
 
 }
