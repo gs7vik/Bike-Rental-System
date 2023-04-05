@@ -9,5 +9,5 @@ public interface BookingService {
 
     public BookingOutputDto saveBooking(BookingInputDto bookingInputDto);
 
-   // public Booking getBooking(Long id);
+    public BookingOutputDto getBooking(Long id);
 }

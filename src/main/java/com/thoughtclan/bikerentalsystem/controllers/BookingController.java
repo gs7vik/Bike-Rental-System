@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
@@ -23,10 +25,13 @@ public class BookingController {
     public BookingOutputDto createBooking(@RequestBody BookingInputDto input){
         return bookingService.saveBooking(input);
     }
-    @GetMapping
-    public String dummy(){
-        return "hello";
+
+
+    @GetMapping("/{id}")
+    public BookingOutputDto getBookingById(@PathVariable Long id){
+        return bookingService.getBooking(id);
     }
+
 
 
 

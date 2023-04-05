@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.*;
 
 @Entity
 @Getter
@@ -20,11 +19,10 @@ public class Booking {
     private Long id;
 
 
-   /* @ManyToOne( targetEntity = BikeDetails.class )
+    @ManyToOne( targetEntity = Bike.class )
 
-    private BikeDetails bikeDetails;
+    private Bike bike;
 
-    */
 
     private LocalDateTime startTime;
 

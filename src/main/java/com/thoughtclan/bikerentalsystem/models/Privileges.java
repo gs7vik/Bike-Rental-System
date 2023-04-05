@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 
 @Table(name="privileges")
-public class privileges {
+public class Privileges {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -16,12 +16,12 @@ public class privileges {
     @Column(name = "description")
     private String description;
 
-    public privileges(String name, String display_Name, String description){
+    public Privileges(String name, String display_Name, String description){
         this.name=name;
         this.description=description;
         this.display_Name=display_Name;
     }
-    public privileges(){}
+    public Privileges(){}
 
     public String getName() {
         return name;

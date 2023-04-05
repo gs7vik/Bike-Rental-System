@@ -8,6 +8,8 @@ import lombok.Setter;
 public class BikeInDto {
     private Long id;
     private String model;
-    private Double price_per_hour;
+
     private String is_available;
+
+    private Double price_per_hour;
 }

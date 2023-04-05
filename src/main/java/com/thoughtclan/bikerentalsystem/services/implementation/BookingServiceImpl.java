@@ -2,11 +2,12 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
-import com.thoughtclan.bikerentalsystem.models.BikeDetails;
+import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
+import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.models.User;
 import com.thoughtclan.bikerentalsystem.repositories.*;
-import com.thoughtclan.bikerentalsystem.services.BikeDetailsService;
+import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.services.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,7 +26,7 @@ public class BookingServiceImpl implements BookingService {
 
     private final UserRepository userRepository;
 
-    private final BikeDetailsService bikeDetailsService;
+    private final BikeService bikeService;
 
     private final RoleRepository roleRepository;
 
@@ -36,19 +37,25 @@ public class BookingServiceImpl implements BookingService {
 
             User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
             booking.setUser(user);
-          /* BikeDetails bikeDetails=bikeDetailsRepository.findById(booking.getId()).orElse(null);
-           booking.setBikeDetails(bikeDetails);*/
+          Bike bike =bikeDetailsRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
+           booking.setBike(bike);
 
-          /*
-            Double price=bikeDetailsService.calculatePrice(bikeDetails.getPrice_per_hour(),booking.getStartTime(),booking.getEndTime());
+
+            Double price= bikeService.calculatePrice(bike.getPrice_per_hour(),booking.getStartTime(),booking.getEndTime());
             booking.setTotalPrice(price);
 
-           */
-            booking.setTotalPrice(100.00);
+
+
             bookingRepository.save(booking);
             this.modelMapper.map(booking, BookingOutputDto.class);
         BookingOutputDto fnvlrnvlnb = modelMapper.map(booking, BookingOutputDto.class);
             return fnvlrnvlnb;
+    }
+
+    @Override
+    public BookingOutputDto getBooking(Long id){
+        Booking booking=bookingRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Booking with "+id+"is not found"));
+        return modelMapper.map(booking,BookingOutputDto.class);
     }
 
 
