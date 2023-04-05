@@ -1,10 +1,8 @@
 package com.thoughtclan.bikerentalsystem.services;
 
-import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import java.time.LocalDateTime;
 
 public interface BikeService {
-    public BikeOutDto saveBike(BikeInDto bikeDetails);
 
-    BikeOutDto updatePrice(Long id, BikeInDto input);
+    Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime);
 }

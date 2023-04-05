@@ -28,16 +28,16 @@ public class Role {
         }
 
 
-    public Role(String name, String description,List<privileges> Privileges) {
+    public Role(String name, String description,List<com.thoughtclan.bikerentalsystem.models.Privileges> Privileges) {
 
 
         this.name = name;
         this.description = description;
-        this.Privileges=(List<privileges>) Privileges;
+        this.Privileges=(List<com.thoughtclan.bikerentalsystem.models.Privileges>) Privileges;
     }
     @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="role_privileges_mapping",joinColumns=@JoinColumn(name="role_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="privileges_id",referencedColumnName="id"))
-    private List<privileges> Privileges;
+    private List<com.thoughtclan.bikerentalsystem.models.Privileges> Privileges;
     public Long getId() {
             return id;}
         public void setId(Long id) {
