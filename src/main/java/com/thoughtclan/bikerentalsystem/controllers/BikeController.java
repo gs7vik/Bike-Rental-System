@@ -21,7 +21,7 @@ public class BikeController {
         return bikeService.saveBike(input);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
         return bikeService.updatePrice(id,input);
     }

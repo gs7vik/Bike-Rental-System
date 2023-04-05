@@ -6,6 +6,7 @@ import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
+import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import java.time.temporal.ChronoUnit;
 public class BikeServiceImpl implements BikeService {
 
     private final ModelMapper modelMapper;
+
+    private final PatchMapper patchMapper;
     private final BikeRepository bikeRepository;
     public Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime){
 
@@ -38,7 +41,7 @@ public class BikeServiceImpl implements BikeService {
     public BikeOutDto updatePrice(Long id,BikeInDto input) {
         Bike b_price=modelMapper.map(input,Bike.class);
         Bike existing_bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
-        modelMapper.map(b_price,existing_bike);
+        patchMapper.map(b_price,existing_bike);
         existing_bike=bikeRepository.save(existing_bike);
         return modelMapper.map(existing_bike,BikeOutDto.class);
     }
