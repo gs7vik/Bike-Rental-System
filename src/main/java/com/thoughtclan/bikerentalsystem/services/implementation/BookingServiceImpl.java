@@ -37,12 +37,14 @@ public class BookingServiceImpl implements BookingService {
 
             User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
             booking.setUser(user);
-          Bike bike =bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
+          Bike bike = bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
            booking.setBike(bike);
 
 
             Double price= bikeService.calculatePrice(bike.getPrice_per_hour(),booking.getStartTime(),booking.getEndTime());
             booking.setTotalPrice(price);
+
+
 
             bookingRepository.save(booking);
             this.modelMapper.map(booking, BookingOutputDto.class);

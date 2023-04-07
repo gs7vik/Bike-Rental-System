@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class UserOutDto {
     private Long id;
+
     private String name;
 
 }
