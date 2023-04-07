@@ -32,4 +32,7 @@ public class Bike {
     @Column(nullable = false)
     private String is_available;
 
+    @Column (name="bikeImage_url")
+    private String bikeImage_url;
+
 }
