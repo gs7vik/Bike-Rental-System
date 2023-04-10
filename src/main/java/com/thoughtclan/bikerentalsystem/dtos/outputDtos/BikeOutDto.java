@@ -7,6 +7,7 @@ public class BikeOutDto {
     private Integer id;
     private String Brand;
     private String model;
-    private String is_available;
-    private Double price_per_hour;
+    private String isAvailable;
+    private Double pricePerHour;
+
 }

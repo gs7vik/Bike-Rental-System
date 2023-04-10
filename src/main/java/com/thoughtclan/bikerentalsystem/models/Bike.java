@@ -27,7 +27,7 @@ public class Bike {
     private String bikeNumberPlate;
 
     @Column(name = "Price_per_hour")
-    private Double price_per_hour;
+    private Double pricePerHour;
 
     @Column(nullable = false)
     private String isAvailable;
@@ -35,7 +35,6 @@ public class Bike {
     @Column(name="image_url")
     private String imageUrl;
 
-    @Column (name="bikeImage_url")
-    private String bikeImage_url;
+
 
 }
