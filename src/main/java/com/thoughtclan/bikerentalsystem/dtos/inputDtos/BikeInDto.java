@@ -9,9 +9,9 @@ public class BikeInDto {
     private Long id;
     private String brand;
     private String model;
-    private String bike_number;
+    private String bikeNumberPlate;
 
-    private Double price_per_hour;
-    private String is_available;
-    private String bikeImage_url;
+    private Double pricePerHour;
+    private String isAvailable;
+    private String imageUrl;
 }
