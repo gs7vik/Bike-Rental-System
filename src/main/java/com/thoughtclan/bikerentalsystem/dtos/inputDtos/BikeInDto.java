@@ -13,4 +13,5 @@ public class BikeInDto {
 
     private Double price_per_hour;
     private String is_available;
+    private String bikeImage_url;
 }
