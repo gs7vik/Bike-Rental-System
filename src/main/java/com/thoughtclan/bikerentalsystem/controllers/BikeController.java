@@ -23,7 +23,7 @@ public class BikeController {
         return bikeService.saveBike(input);
     }
 
-    @GetMapping("/bikes")
+    @GetMapping("/bikes/{id}")
     public List<BikeOutDto> myBikes(){return bikeService.myBikes();}
 
     @PatchMapping("/{id}")

@@ -16,6 +16,9 @@ public class Privileges {
     @Column(name = "description")
     private String description;
 
+
+
+
     public Privileges(String name, String display_Name, String description){
         this.name=name;
         this.description=description;

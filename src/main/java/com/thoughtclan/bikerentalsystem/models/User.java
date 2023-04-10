@@ -3,10 +3,6 @@ package com.thoughtclan.bikerentalsystem.models;
 import java.util.List;
 import jakarta.persistence.*;
 
-
-
-
-
 @Entity
 @Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames ={ "email","license_no"}))
 
@@ -24,6 +20,7 @@ public class User {
     private String licenseNo;
     @Column(name="contact_no")
     private String contactNo;
+
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
     private List<Role> roles;

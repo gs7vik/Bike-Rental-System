@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -34,5 +36,10 @@ public class Bike {
 
     @Column (name="bikeImage_url")
     private String bikeImage_url;
+
+    @OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name="vehicle_privileges_mapping",joinColumns=@JoinColumn(name="bike_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="privileges_id",referencedColumnName="id"))
+    private List<com.thoughtclan.bikerentalsystem.models.Privileges> Privileges;
+
 
 }
