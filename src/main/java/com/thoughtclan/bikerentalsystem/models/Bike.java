@@ -24,12 +24,15 @@ public class Bike {
     private String model;
 
     @Column(nullable = false)
-    private String bike_number;
+    private String bikeNumberPlate;
 
     @Column(name = "Price_per_hour")
     private Double price_per_hour;
 
     @Column(nullable = false)
-    private String is_available;
+    private String isAvailable;
+
+    @Column(name="image_url")
+    private String imageUrl;
 
 }

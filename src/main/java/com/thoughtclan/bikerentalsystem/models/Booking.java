@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +24,10 @@ public class Booking {
 
     private Bike bike;
 
-
+    @JsonFormat(pattern="dd-MM-yyyy 'T' HH:mm")
     private LocalDateTime startTime;
 
+    @JsonFormat(pattern="dd-MM-yyyy 'T' HH:mm")
     private LocalDateTime endTime;
 
     private Double totalPrice;
