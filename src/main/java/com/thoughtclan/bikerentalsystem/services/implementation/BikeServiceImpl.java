@@ -9,10 +9,13 @@ import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +47,25 @@ public class BikeServiceImpl implements BikeService {
         patchMapper.map(b_price,existing_bike);
         existing_bike=bikeRepository.save(existing_bike);
         return modelMapper.map(existing_bike,BikeOutDto.class);
+    }
+
+    @Override
+    public BikeOutDto deleteBike() {
+        return null;
+    }
+
+
+    public List<BikeOutDto> myBikes() {
+        List<Bike> users = bikeRepository.findAll();
+        return users.stream().map(user -> modelMapper.map(user,BikeOutDto.class)).collect(Collectors.toList());
+
+    }
+
+    public ResponseEntity<BikeOutDto> deleteBike(Long id) {
+        Bike bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
+        bikeRepository.delete(bike);
+        return ResponseEntity.ok(modelMapper.map(bike,BikeOutDto.class));
+
     }
 
 }

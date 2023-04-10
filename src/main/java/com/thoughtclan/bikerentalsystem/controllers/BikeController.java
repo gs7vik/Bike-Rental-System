@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bike")
 @Slf4j
@@ -21,9 +23,16 @@ public class BikeController {
         return bikeService.saveBike(input);
     }
 
+    @GetMapping("/bikes")
+    public List<BikeOutDto> myBikes(){return bikeService.myBikes();}
+
     @PatchMapping("/{id}")
     public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
         return bikeService.updatePrice(id,input);
+    }
+    @DeleteMapping("/{id}")
+    public BikeOutDto deleteBike(@PathVariable Long id){
+        return null;
     }
 
 }
