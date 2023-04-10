@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.dtos.inputDtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,9 @@ public class BookingInputDto {
 
     private Long id;
 
+
     private LocalDateTime startTime;
+
 
     private LocalDateTime endTime;
 
