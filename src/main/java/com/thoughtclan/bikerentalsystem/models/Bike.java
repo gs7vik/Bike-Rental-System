@@ -35,4 +35,7 @@ public class Bike {
     @Column(name="image_url")
     private String imageUrl;
 
+    @Column (name="bikeImage_url")
+    private String bikeImage_url;
+
 }
