@@ -14,4 +14,5 @@ public class BikeInDto {
     private Double pricePerHour;
     private String isAvailable;
     private String imageUrl;
+    private VendorInDto vendor;
 }

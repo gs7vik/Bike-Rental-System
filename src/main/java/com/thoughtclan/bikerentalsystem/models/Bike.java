@@ -36,6 +36,10 @@ public class Bike {
     @Column(name="image_url")
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name="vendor_id",referencedColumnName = "id",nullable = false)
+    private Vendor vendor;
+
 
 //test
 }

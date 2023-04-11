@@ -1,13 +1,10 @@
 package com.thoughtclan.bikerentalsystem.repositories;
 
-import com.thoughtclan.bikerentalsystem.models.Bike;
+import com.thoughtclan.bikerentalsystem.models.Vendor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface BikeRepository extends JpaRepository<Bike,Long> {
+public interface VendorRespository extends JpaRepository<Vendor,Long> {
 
-    List<Bike> findByvendorId(Long id);
 }
