@@ -1,4 +1,4 @@
-package com.thoughtclan.bikerentalsystem.userdto;
+package com.thoughtclan.bikerentalsystem.dtos;
 
 public class UserRegistrationDto {
     private String firstName;
@@ -6,15 +6,20 @@ public class UserRegistrationDto {
     private String email;
     private String password;
     private String licenseNo;
+    private String contactNo;
 
-    public UserRegistrationDto(String firstName, String lastName, String email, String password,String licenseNo) {
+    public UserRegistrationDto(String firstName, String lastName, String email, String password,String licenseNo,String contactNo) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.licenseNo=licenseNo;
+        this.contactNo=contactNo;
     }
+
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -44,6 +49,12 @@ public class UserRegistrationDto {
     }
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
+    }
+    public String getContactNo() {
+        return contactNo;
+    }
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
     }
 
 }

@@ -1,9 +1,13 @@
 package com.thoughtclan.bikerentalsystem.services;
 
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutDto;
 import com.thoughtclan.bikerentalsystem.models.User;
-import com.thoughtclan.bikerentalsystem.userdto.UserRegistrationDto;
+import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 
 public interface UserService {
-    User save(UserRegistrationDto registrationDto);
+    User saveUser(UserRegistrationDto registrationDto);
+
+
+    public UserOutDto getUser(Long id);
 
 }

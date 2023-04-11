@@ -1,13 +1,19 @@
 package com.thoughtclan.bikerentalsystem.models;
+
 import java.util.List;
 import jakarta.persistence.*;
 
+
+
+
+
 @Entity
-@Table(name="user",uniqueConstraints ={ @UniqueConstraint(name="UniqueEmailAndLicenseNo",columnNames={"license_no","email"})})
+@Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames ={ "email","license_no"}))
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name="first_name")
     private String firstName;
     @Column(name="last_name")
@@ -16,24 +22,34 @@ public class User {
     private String password;
     @Column(name="license_no")
     private String licenseNo;
+    @Column(name="contact_no")
+    private String contactNo;
     @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="user_role_mapping",joinColumns=@JoinColumn(name="user_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="role_id",referencedColumnName="id"))
     private List<Role> roles;
 
-    public User(String firstName, String lastName, String email, String password, String licenseNo, List<Role> roles) {
+
+    public User() {
+        super();
+        }
+
+
+
+    public User(String firstName, String lastName, String email, String password, String licenseNo,String contactNo, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.licenseNo = licenseNo;
-        this.roles = roles;
+        this.contactNo = contactNo;
+        this.roles = (List<Role>) roles;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,15 +88,24 @@ public class User {
     public String getLicenseNo() {
         return licenseNo;
     }
-
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
 
 }
