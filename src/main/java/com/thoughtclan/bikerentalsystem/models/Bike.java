@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Bike {
 
     @Id
@@ -36,5 +37,5 @@ public class Bike {
     private String imageUrl;
 
 
-
+//test
 }
