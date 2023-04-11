@@ -17,7 +17,8 @@ public class BookingInputDto {
     private LocalDateTime endTime;
 
     private BikeInDto bike;
-    private UserInDto user;
+
+    //private UserInDto user;
 
 
 

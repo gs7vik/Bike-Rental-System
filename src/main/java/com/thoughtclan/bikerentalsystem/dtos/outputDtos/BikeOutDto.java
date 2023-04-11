@@ -10,4 +10,6 @@ public class BikeOutDto {
     private String isAvailable;
     private Double pricePerHour;
 
+    private String imageUrl;
+
 }
