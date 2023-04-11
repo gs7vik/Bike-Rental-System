@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import com.thoughtclan.bikerentalsystem.services.UserService;
 import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/registration")
 public class UserController {
 
