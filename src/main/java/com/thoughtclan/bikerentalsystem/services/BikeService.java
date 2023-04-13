@@ -4,6 +4,7 @@ import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface BikeService {
 
@@ -12,4 +13,6 @@ public interface BikeService {
     BikeOutDto saveBike(BikeInDto input);
 
     BikeOutDto updatePrice(Long id, BikeInDto input);
+
+    public List<BikeOutDto> getAllBikes();
 }

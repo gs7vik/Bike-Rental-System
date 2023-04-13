@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
-@ResponseBody
+
 @CrossOrigin
 public class BookingController {
 
