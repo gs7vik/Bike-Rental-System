@@ -2,8 +2,10 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
+import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +48,12 @@ public class BikeServiceImpl implements BikeService {
         patchMapper.map(b_price,existing_bike);
         existing_bike=bikeRepository.save(existing_bike);
         return modelMapper.map(existing_bike,BikeOutDto.class);
+    }
+
+    @Override
+    public List<BikeOutDto> getAllBikes(){
+        List<Bike> bikes=bikeRepository.findAll();
+        return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
     }
 
 }

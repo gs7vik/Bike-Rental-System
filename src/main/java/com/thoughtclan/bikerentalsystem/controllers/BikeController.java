@@ -2,10 +2,13 @@ package com.thoughtclan.bikerentalsystem.controllers;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bike")
@@ -25,6 +28,9 @@ public class BikeController {
     public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
         return bikeService.updatePrice(id,input);
     }
+
+    @GetMapping
+    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
 
 
 
