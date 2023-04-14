@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class VendorServiceImpl implements VendorService {
-    private VendorRespository vendorRespository;
+    private final VendorRespository vendorRespository;
 
     private final ModelMapper modelMapper;
     @Override
-    public VendorOutDto addvendor(VendorInDto vendor) {
+    public VendorOutDto addVendor(VendorInDto vendor) {
         Vendor vendor1=modelMapper.map(vendor,Vendor.class);
         vendor1= vendorRespository.save(vendor1);
-        return modelMapper.map(vendor,VendorOutDto.class);
+        return modelMapper.map(vendor1,VendorOutDto.class);
     }
 }

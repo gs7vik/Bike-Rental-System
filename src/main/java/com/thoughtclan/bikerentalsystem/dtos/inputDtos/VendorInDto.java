@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VendorInDto {
     private Long id;
-    private String vendorName;
 }

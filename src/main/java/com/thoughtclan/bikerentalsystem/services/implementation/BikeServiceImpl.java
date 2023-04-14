@@ -29,7 +29,7 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public List<BikeOutDto> vendorBikes(Long id) {
-        List<Bike> bikes=bikeRepository.findByvendorId(id);
+        List<Bike> bikes=bikeRepository.findByVendorId(id);
         return bikes.stream().map(bike1 -> modelMapper.map(bike1,BikeOutDto.class)).collect(Collectors.toList());
     }
 
@@ -41,14 +41,14 @@ public class BikeServiceImpl implements BikeService {
         return estPrice;
     }
 
-    public BikeOutDto saveBike(BikeInDto bikeDetails) {
+    public Bike saveBike(BikeInDto bikeDetails) {
         Bike bikeData=modelMapper.map(bikeDetails, Bike.class);
-        Vendor vendor=vendorRepository.findById(bikeDetails.getVendor().getId()).orElse(null);
+        Vendor vendor=vendorRepository.findById(bikeDetails.getVendorId()).orElse(null);
+        bikeData.setVendor(vendor);
         bikeData=bikeRepository.save(bikeData);
-        return modelMapper.map(bikeData,BikeOutDto.class);
+        return bikeData;
 
     }
-
 
     public BikeOutDto updatePrice(Long id,BikeInDto input) {
         Bike b_price=modelMapper.map(input,Bike.class);

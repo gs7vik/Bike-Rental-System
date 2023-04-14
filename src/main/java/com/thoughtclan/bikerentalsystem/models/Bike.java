@@ -37,7 +37,7 @@ public class Bike {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name="vendor_id",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name="vendorId",referencedColumnName = "id")
     private Vendor vendor;
 
 

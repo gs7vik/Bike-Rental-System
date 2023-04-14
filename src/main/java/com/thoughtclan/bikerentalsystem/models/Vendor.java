@@ -13,4 +13,6 @@ public class Vendor {
 
     private String vendorName;
 
+    private String contactNo;
+
 }

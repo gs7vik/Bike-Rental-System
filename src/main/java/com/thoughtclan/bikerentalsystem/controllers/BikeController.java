@@ -1,6 +1,7 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class BikeController {
 
 
     @PostMapping("/addBike")
-    public BikeOutDto addBike(@RequestBody BikeInDto input){
+    public Bike addBike(@RequestBody BikeInDto input){
         return bikeService.saveBike(input);
     }
 
