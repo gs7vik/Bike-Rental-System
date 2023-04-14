@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BikeService {
 
-    public List<BikeOutDto> vendorBikes(Long id);
+    public List<BikeOutDto> getBikesByVendor(Long id);
 
     Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime);
 
