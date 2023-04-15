@@ -69,8 +69,9 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
-    public List<BikeOutDto> getAllBikes() {
-        return null;
+    public List<BikeOutDto> getAllBikes(){
+        List<Bike> bikes=bikeRepository.findAll();
+        return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
     }
 
 }
