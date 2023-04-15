@@ -14,5 +14,6 @@ public interface BikeService {
 
     BikeOutDto updatePrice(Long id, BikeInDto input);
 
+    public BikeOutDto getBike(Long id);
     public List<BikeOutDto> getAllBikes();
 }

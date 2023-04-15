@@ -29,6 +29,12 @@ public class BikeController {
         return bikeService.updatePrice(id,input);
     }
 
+    @GetMapping("/{id}")
+    public BikeOutDto getBikeById(@PathVariable Long id){
+        return bikeService.getBike(id);
+    }
+
+
     @GetMapping
     public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
 
