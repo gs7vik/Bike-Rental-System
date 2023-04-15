@@ -61,9 +61,17 @@ public class BikeServiceImpl implements BikeService {
         return modelMapper.map(existing_bike,BikeOutDto.class);
     }
 
+
     @Override
-    public List<BikeOutDto> getAllBikes() {
-        return null;
+    public BikeOutDto getBike(Long id){
+        Bike bike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Bike with "+id+"is not found"));
+        return modelMapper.map(bike,BikeOutDto.class);
+    }
+
+    @Override
+    public List<BikeOutDto> getAllBikes(){
+        List<Bike> bikes=bikeRepository.findAll();
+        return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
     }
 
 }

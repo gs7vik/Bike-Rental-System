@@ -33,4 +33,6 @@ public class BikeController {
         return bikeService.getBikesByVendor(id);
     }
 
+    @GetMapping
+    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
 }
