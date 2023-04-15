@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Bike {
 
     @Id
@@ -35,6 +36,10 @@ public class Bike {
     @Column(name="image_url")
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name="vendorId",referencedColumnName = "id")
+    private Vendor vendor;
 
 
+//test
 }

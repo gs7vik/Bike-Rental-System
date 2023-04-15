@@ -19,7 +19,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne( targetEntity = Bike.class )
 
     private Bike bike;
