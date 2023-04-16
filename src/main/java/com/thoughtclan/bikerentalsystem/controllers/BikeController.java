@@ -6,6 +6,7 @@ import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class BikeController {
     }
 
     @GetMapping
-    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
+    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<BikeOutDto> deleteBike(@PathVariable Long id){
+        return bikeService.deleteBike(id);
+
+    };
 }
