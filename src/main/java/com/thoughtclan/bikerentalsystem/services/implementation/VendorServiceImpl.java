@@ -15,6 +15,8 @@ public class VendorServiceImpl implements VendorService {
     private final VendorRepository vendorRepository;
 
     private final ModelMapper modelMapper;
+
+    //adds vendor to database
     @Override
     public VendorOutDto addVendor(VendorInDto vendor) {
         Vendor vendor1=modelMapper.map(vendor,Vendor.class);
