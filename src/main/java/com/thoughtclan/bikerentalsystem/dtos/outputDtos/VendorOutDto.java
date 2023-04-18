@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class VendorOutDto {
     private Long id;
     private String vendorName;
+    private String contactNo;
 
 }
