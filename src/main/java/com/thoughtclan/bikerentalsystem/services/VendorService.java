@@ -5,4 +5,10 @@ import com.thoughtclan.bikerentalsystem.dtos.outputDtos.VendorOutDto;
 
 public interface VendorService {
     VendorOutDto addVendor(VendorInDto vendor);
+
+    VendorOutDto getVendor(Long id);
+
+    VendorOutDto partialUpdateVendor(VendorInDto input, Long id);
+
+    VendorOutDto updateVendor(Long id, VendorInDto input);
 }
