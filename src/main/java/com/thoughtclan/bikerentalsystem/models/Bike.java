@@ -30,10 +30,10 @@ public class Bike {
     @Column(name = "Price_per_hour")
     private Double pricePerHour;
 
-    @Column
-    private String isAvailable="Yes";
+    @Column(nullable = false)
+    private String isAvailable;
 
-    @Column(columnDefinition = "TEXT",name = "image_url")
+    @Column(name="image_url")
     private String imageUrl;
 
     @ManyToOne

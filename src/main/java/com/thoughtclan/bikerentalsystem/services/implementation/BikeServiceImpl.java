@@ -11,7 +11,6 @@ import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,6 +28,13 @@ public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
     private final VendorRepository vendorRepository;
 
+    @Override
+    public List<BikeOutDto> getBikesByVendor(Long id) {
+        List<Bike> vendorBikes=bikeRepository.findByVendorId(id);
+        return vendorBikes.stream().map(vendorBike1->modelMapper.map(vendorBike1,BikeOutDto.class)).collect(Collectors.toList());
+
+    }
+
     public Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime){
 
         long hoursBetween = ChronoUnit.HOURS.between(fromTime, toTime);
@@ -37,15 +43,6 @@ public class BikeServiceImpl implements BikeService {
         return estPrice;
     }
 
-    //displays the bikes belongs to a particular vendor
-    @Override
-    public List<BikeOutDto> getBikesByVendor(Long id) {
-        List<Bike> vendorBikes=bikeRepository.findByVendorId(id);
-        return vendorBikes.stream().map(vendorBike1->modelMapper.map(vendorBike1,BikeOutDto.class)).collect(Collectors.toList());
-
-    }
-
-    //adds bike to Database
     public Bike saveBike(BikeInDto bikeDetails) {
         Bike bikeData=modelMapper.map(bikeDetails, Bike.class);
         Vendor vendor = vendorRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
@@ -55,7 +52,7 @@ public class BikeServiceImpl implements BikeService {
 
     }
 
-    //partial update the details of bike
+
     public BikeOutDto updatePrice(Long id,BikeInDto input) {
         Bike b_price=modelMapper.map(input,Bike.class);
         Bike existing_bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
@@ -65,26 +62,16 @@ public class BikeServiceImpl implements BikeService {
     }
 
 
-    //displays a particular bike
     @Override
     public BikeOutDto getBike(Long id){
         Bike bike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Bike with "+id+"is not found"));
         return modelMapper.map(bike,BikeOutDto.class);
     }
 
-    //displays the list of all the bikes in Database
     @Override
     public List<BikeOutDto> getAllBikes(){
         List<Bike> bikes=bikeRepository.findAll();
         return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public ResponseEntity<BikeOutDto> deleteBike(Long id) {
-        Bike bike=bikeRepository.findById(id).orElseThrow(()-> new RuntimeException("No bike with such Id"));
-        bikeRepository.delete(bike);
-        return ResponseEntity.ok(modelMapper.map(bike,BikeOutDto.class));
-
     }
 
 }
