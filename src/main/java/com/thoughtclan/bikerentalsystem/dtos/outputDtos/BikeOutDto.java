@@ -8,9 +8,9 @@ public class BikeOutDto {
     private Integer id;
     private String brand;
     private String model;
+    private String isAvailable;
     private Double pricePerHour;
     private String imageUrl;
-    private String isAvailable;
     private VendorOutDto vendor;
 
 }
