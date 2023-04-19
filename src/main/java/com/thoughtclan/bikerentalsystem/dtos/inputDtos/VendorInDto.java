@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VendorInDto {
     private Long id;
-    private String vendorName;
+    private String fullName;
     private String contactNo;
+    private String address;
+    private String email;
 }

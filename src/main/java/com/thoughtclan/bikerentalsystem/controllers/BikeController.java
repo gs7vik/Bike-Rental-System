@@ -2,14 +2,14 @@ package com.thoughtclan.bikerentalsystem.controllers;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/bike")
@@ -25,7 +25,7 @@ public class BikeController {
         return bikeService.saveBike(input);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update/{id}")
     public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
         return bikeService.updatePrice(id,input);
     }
@@ -33,12 +33,24 @@ public class BikeController {
     public List<BikeOutDto> getVendorBikes(@PathVariable Long id){
         return bikeService.getBikesByVendor(id);
     }
-
-    @GetMapping
-    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
-
     @GetMapping("/{id}")
     public BikeOutDto getBikeById(@PathVariable Long id){
         return bikeService.getBike(id);
     }
+
+    @GetMapping
+    public List<BikeOutDto> getAllBike(){return bikeService.getAllBikes();}
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<BikeOutDto> deleteBike(@PathVariable Long id){
+        return bikeService.deleteBike(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BikeOutDto> updateBike(@PathVariable long id,@RequestBody BikeInDto input){
+        return bikeService.updateBike(id,input);
+    }
+
 }
+
+

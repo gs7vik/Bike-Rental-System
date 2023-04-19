@@ -11,8 +11,11 @@ public class Vendor {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private String vendorName;
+    private String fullName;
 
     private String contactNo;
+    private String email;
+    private String address;
+
 
 }

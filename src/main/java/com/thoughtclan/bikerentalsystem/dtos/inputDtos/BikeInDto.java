@@ -13,7 +13,6 @@ public class BikeInDto {
     private String bikeNumberPlate;
 
     private Double pricePerHour;
-    private String isAvailable;
     private String imageUrl;
     private Long vendorId=1L;
 }

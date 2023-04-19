@@ -30,9 +30,6 @@ public class Bike {
     @Column(name = "Price_per_hour")
     private Double pricePerHour;
 
-    @Column(nullable = false)
-    private String isAvailable;
-
     @Column(name="image_url")
     private String imageUrl;
 
