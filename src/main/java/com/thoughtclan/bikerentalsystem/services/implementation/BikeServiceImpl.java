@@ -82,4 +82,13 @@ public class BikeServiceImpl implements BikeService {
         return ResponseEntity.ok(modelMapper.map(bike, BikeOutDto.class));
     }
 
+    @Override
+    public ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input) {
+        Bike bike=modelMapper.map(input, Bike.class);
+        Bike existingBike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("not bike with such Id"));
+        modelMapper.map(bike,existingBike);
+        existingBike=bikeRepository.save(existingBike);
+        return ResponseEntity.ok(modelMapper.map(existingBike, BikeOutDto.class));
+    }
+
 }
