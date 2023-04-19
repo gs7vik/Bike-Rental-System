@@ -1,6 +1,7 @@
 package com.thoughtclan.bikerentalsystem.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,8 @@ public class Booking {
     private LocalDateTime endTime;
 
     private Double totalPrice;
+    @Column
+    private BookingStatus status;
 
     @ManyToOne
     @JoinColumn(name="user_id",referencedColumnName = "id")

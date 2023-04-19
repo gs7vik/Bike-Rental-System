@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Data
 public class BikeInDto {
+
     private Long id;
     private String brand;
     private String model;
@@ -14,5 +15,5 @@ public class BikeInDto {
     private Double pricePerHour;
     private String isAvailable;
     private String imageUrl;
-    private Long vendorId;
+    private Long vendorId=1L;
 }
