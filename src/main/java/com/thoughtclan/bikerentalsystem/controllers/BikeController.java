@@ -6,9 +6,10 @@ import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/bike")
@@ -28,15 +29,13 @@ public class BikeController {
     public BikeOutDto updateBike(@PathVariable Long id,@RequestBody BikeInDto input){
         return bikeService.updatePrice(id,input);
     }
-
-    @GetMapping("{id}")
-    public BikeOutDto getBike(@PathVariable Long id){
-        return bikeService.getBike(id);
-    }
-
     @GetMapping("/vendor/{id}")
     public List<BikeOutDto> getVendorBikes(@PathVariable Long id){
         return bikeService.getBikesByVendor(id);
+    }
+    @GetMapping("/{id}")
+    public BikeOutDto getBikeById(@PathVariable Long id){
+        return bikeService.getBike(id);
     }
 
     @GetMapping
@@ -51,4 +50,7 @@ public class BikeController {
     public ResponseEntity<BikeOutDto> updateBike(@PathVariable long id,@RequestBody BikeInDto input){
         return bikeService.updateBike(id,input);
     }
+
 }
+
+

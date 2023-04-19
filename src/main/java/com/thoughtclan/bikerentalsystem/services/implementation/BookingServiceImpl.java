@@ -2,6 +2,7 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
+import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
@@ -77,6 +78,15 @@ public class BookingServiceImpl implements BookingService {
                 return ResponseEntity.ok(modelMapper.map(booking,BookingOutputDto.class));
     }
 
+
+    /*
+    public List<BookingOutputDto> getBookingByStatus(BookingStatus bookingStatus){
+        List<Booking> booking = bookingRepository.findByBookingStatus(bookingStatus);
+        return booking.stream().map(order->modelMapper.map(order,BookingOutputDto.class)).collect(Collectors.toList());
+    }
+
+
+     */
 
 
 }
