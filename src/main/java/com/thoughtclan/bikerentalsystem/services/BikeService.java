@@ -22,4 +22,6 @@ public interface BikeService {
     public List<BikeOutDto> getAllBikes();
 
     ResponseEntity<BikeOutDto> deleteBike(Long id);
+
+    ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input);
 }

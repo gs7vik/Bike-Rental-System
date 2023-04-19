@@ -8,7 +8,7 @@ public class BikeOutDto {
     private Integer id;
     private String brand;
     private String model;
-
+    private String bikeNumberPlate;
     private Double pricePerHour;
     private String imageUrl;
     private VendorOutDto vendor;

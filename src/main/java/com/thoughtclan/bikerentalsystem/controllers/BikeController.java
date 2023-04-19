@@ -29,6 +29,11 @@ public class BikeController {
         return bikeService.updatePrice(id,input);
     }
 
+    @GetMapping("{id}")
+    public BikeOutDto getBike(@PathVariable Long id){
+        return bikeService.getBike(id);
+    }
+
     @GetMapping("/vendor/{id}")
     public List<BikeOutDto> getVendorBikes(@PathVariable Long id){
         return bikeService.getBikesByVendor(id);
@@ -40,5 +45,10 @@ public class BikeController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<BikeOutDto> deleteBike(@PathVariable Long id){
         return bikeService.deleteBike(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BikeOutDto> updateBike(@PathVariable long id,@RequestBody BikeInDto input){
+        return bikeService.updateBike(id,input);
     }
 }
