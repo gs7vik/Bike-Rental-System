@@ -14,10 +14,10 @@ import java.io.InputStream;
 @Configuration
 public class FirebaseConfig {
 
-    @Value("${firebase.file}")
+    @Value("bike-rental-system.json")
     private String FIREBASE_CONFIG_FILE;
 
-   // @Bean
+   @Bean
     public void initFirebase() throws IOException {
         InputStream firebaseFile = new ClassPathResource(FIREBASE_CONFIG_FILE).getInputStream();
         FirebaseOptions firebaseOptions = FirebaseOptions.builder()

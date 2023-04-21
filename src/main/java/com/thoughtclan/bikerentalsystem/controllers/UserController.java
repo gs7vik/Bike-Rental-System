@@ -1,5 +1,7 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 
+import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,4 +29,10 @@ public class UserController {
 
 
     }
+
+    @PostMapping("/login")
+    public LoginOutputDto login(@RequestBody LoginInputDto input){
+        return userService.login(input);
+    }
+
 }

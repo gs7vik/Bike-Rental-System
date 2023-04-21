@@ -39,6 +39,7 @@ public class BikeServiceImpl implements BikeService {
     public Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime){
 
         long hoursBetween = ChronoUnit.HOURS.between(fromTime, toTime);
+
         long minutesBetween = ChronoUnit.MINUTES.between(fromTime,toTime)-(hoursBetween*60);
         double estPrice = (hoursBetween*pricePerHour)+(minutesBetween*(pricePerHour/(60)));
         return estPrice;
