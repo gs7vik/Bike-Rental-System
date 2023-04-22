@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bike-rentail-system",
+  "private_key_id": "4568a404ef1d2c8ca6c2d661550bc7800af99d1d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDRcn/dTrbkBaAv\n3G4fo/jGgli7YGp6uFsl4R8n6HARqmy+h/hYw9fR5ySudtZHXbDHBiyTnYYnijyD\nGzA0LbIikQZKZ+Y3fZM0KzP/BbdXaBQkDq1SaVWWG8tA0WSerqxYpVrxcAqJUhMO\n5XqeSJ0PSoyYuV9uVkTJJrYCHZMM80jjLqbuR9J6hfO5Wo4t7NZdll+L8gplViEh\nZ55m7RhxW54Mk3dQPhZfB14Ibsl/aruZP3avKzPAvSp3u/IpVBSrSst8M43Eu8e6\n9qrOnrSJR3SanxVuRiNA38R77g96lawgmbEQmykhFosRarB8MmBa5w7pr2+WPJWs\nR8btvAf1AgMBAAECggEASw2hNTA6SH6dltkCG1N6V8QowMh9j4lVnD7OF9JqqmHs\nQuBdhY10XpLaKayK/5rauI8FVUZa5vtZ0M9i2CfR0CIw42PU8uiMYeLjaIznVKqG\noR8jS8dUNIy0Kn9+c4B7YO6sJp10IR4olytzY5n4shyQQkAXKuY+EujMyvhHFBnJ\noZ8Ih9OGAAeTu2jTl7dEYTYhUdAXMHjDSKIREVVPOhTw1qX434cHxjCuBhAjetka\n97cIQTHiabhoCiITesvVP8LnTOXRadJ7JfmGfmbwPqR6GLeJLjTvItT7g+HNIZEa\ny8v34MHJZNYNlQcF2VvsuzQbCbDypWqiZQDu2Qy/pwKBgQD3UpDGJBw3NJVfg7fr\ncF9GmCYoJaRpwfUJruhw91B8gD+rcq+sbbkiuu1F9bMd2A2juqu6ogwiaE6fO6RY\n5R3MyopUCWfO+ImNL0qpfWlYiLL5ZSwUcirwgckIrkPaYroF5t3RaFM48Wb611pS\nHXpcDXhR8XiVNdsFNYRh10hxGwKBgQDYy72rK5GGiKmqlWSOOuiIgvRHgvqRmvV7\nQvnyFQnNR7KpwAR3qwejYaVKIIVVwWvM6XjyOGgtpI3ahtqmq55/WH11aucEBvJ/\nWLVvR6eU9qszj6WCJrjBN5L6KxpnX+YcMfQJxSkw3AMD8YX79tj1Q27P1IfXpFE8\nqZcUSoYMLwKBgQDLSj2f8FyU8A775LwPtV1LHJL4mwBKwdfVbsS23kJ1I8Gx/mHx\n3Hq51mZkA/KHzGhhtXWkwcAxpAVEE3UicKmPBMixDM4cLOR7fWzkZiZqVGqwXn3e\nDH3JFRUWoo85eb8oTLz1fMgzXRHli5A9QOertJK64D3af9sYrAW1mox8EwKBgQCN\nNU/KMSutpFBW4s3HcolJeXqhJagNtRAWBE8HJjrnMb8moAKI66ai/ZQKz1npvH15\nz8zOgH0i1Z7r6pB6pSgsrDezhjkIv3muBtrOq6508aIbiIH2X0BR4d/jALZHBQi9\n7q+UuY4V3Ag+xk9OCb/RKOYBit4cUFP1nkTgm5XqUwKBgQDRKmC8zXFo7s3FIRbs\n0Ry24aZzXU4DxSkdG9V0DTBFp0/c8PGb6vDRw2w0KWdAYcRQY6jrU9kuL15XdBSK\n95vsAfB8jx6c2uXhCgqSKtTbCZAjJvpG2+OkudY/QElOiTFeWlkqG3eZ4EIy8M3R\nm5L21kECHFPwv7FEctMmiv7s+g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-giyhc@bike-rentail-system.iam.gserviceaccount.com",
+  "client_id": "117742485846421972530",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-giyhc%40bike-rentail-system.iam.gserviceaccount.com"
+}
