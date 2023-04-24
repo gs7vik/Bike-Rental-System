@@ -14,7 +14,7 @@ public interface BikeService {
 
     Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime);
 
-    Bike saveBike(BikeInDto input);
+//    Bike saveBike(BikeInDto input);
 
     BikeOutDto updatePrice(Long id, BikeInDto input);
 
@@ -23,5 +23,9 @@ public interface BikeService {
 
     ResponseEntity<BikeOutDto> deleteBike(Long id);
 
-    ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input);
+//    ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input);
+
+    BikeOutDto addBike(BikeInDto bikeDetails);
+
+    ResponseEntity<BikeOutDto> updateBike(Long id, BikeInDto bikeDetails);
 }
