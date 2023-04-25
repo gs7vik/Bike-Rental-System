@@ -10,7 +10,8 @@ public class BikeOutDto {
     private String model;
     private String bikeNumberPlate;
     private Double pricePerHour;
-    private String imageUrl;
-    private VendorOutDto vendor;
+    private byte[] image;
+    private Long vendorId;
+
 
 }
