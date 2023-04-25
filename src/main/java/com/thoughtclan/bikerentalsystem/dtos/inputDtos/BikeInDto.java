@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.dtos.inputDtos;
 
+import com.thoughtclan.bikerentalsystem.models.Vendor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +12,7 @@ public class BikeInDto {
     private String brand;
     private String model;
     private String bikeNumberPlate;
-
+    private byte[] image;
     private Double pricePerHour;
-    private String imageUrl;
-    private Long vendorId=1L;
+    private Long vendorId;
 }

@@ -29,10 +29,13 @@ public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
     private final VendorRepository vendorRepository;
 
-    @Override
+
+    //Get the bikes added by a particular Vendor
     public List<BikeOutDto> getBikesByVendor(Long id) {
-        List<Bike> vendorBikes=bikeRepository.findByVendorId(id);
-        return vendorBikes.stream().map(vendorBike1->modelMapper.map(vendorBike1,BikeOutDto.class)).collect(Collectors.toList());
+        List<Bike> vendorBikes=bikeRepository.findByVendorIdId(id);
+        List<BikeOutDto> bikes;
+        bikes= vendorBikes.stream().map(vendorBike1->modelMapper.map(vendorBike1,BikeOutDto.class)).collect(Collectors.toList());
+        return bikes;
 
     }
 
@@ -45,16 +48,39 @@ public class BikeServiceImpl implements BikeService {
         return estPrice;
     }
 
-    public Bike saveBike(BikeInDto bikeDetails) {
-        Bike bikeData=modelMapper.map(bikeDetails, Bike.class);
-        Vendor vendor = vendorRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
-        bikeData.setVendor(vendor);
-        bikeData=bikeRepository.save(bikeData);
-        return modelMapper.map(bikeData,Bike.class);
+
+//    public Bike saveBike(BikeInDto bikeDetails) {
+//        Bike bikeData=modelMapper.map(bikeDetails, Bike.class);
+//        Vendor vendor = vendorRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
+//        bikeData.setVendorId(vendor);
+//        bikeData=bikeRepository.save(bikeData);
+//        return modelMapper.map(bikeData,Bike.class);
+//
+//    }
+
+    //Add a new bike to Database
+    public BikeOutDto addBike(BikeInDto bikeDetails) {
+        Bike bikenotes=modelMapper.map(bikeDetails, Bike.class);
+        Vendor vendor=vendorRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
+        bikenotes.setVendorId(vendor);
+        bikeRepository.save(bikenotes);
+        return modelMapper.map(bikenotes, BikeOutDto.class);
+    }
+
+
+    //update the already existing bike
+    @Override
+    public ResponseEntity<BikeOutDto> updateBike(Long id, BikeInDto bikeDetails) {
+        Bike bike=modelMapper.map(bikeDetails,Bike.class);
+        Bike existing_bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such Id"));
+        modelMapper.map(bike,existing_bike);
+        existing_bike=bikeRepository.save(existing_bike);
+        return ResponseEntity.ok(modelMapper.map(existing_bike, BikeOutDto.class));
 
     }
 
 
+    //partial updating of bike
     public BikeOutDto updatePrice(Long id,BikeInDto input) {
         Bike b_price=modelMapper.map(input,Bike.class);
         Bike existing_bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
@@ -64,18 +90,22 @@ public class BikeServiceImpl implements BikeService {
     }
 
 
+    //get details of a particular bike
     @Override
     public BikeOutDto getBike(Long id){
         Bike bike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Bike with "+id+"is not found"));
         return modelMapper.map(bike,BikeOutDto.class);
     }
 
+    //Get all bikes present in Database
     @Override
     public List<BikeOutDto> getAllBikes(){
         List<Bike> bikes=bikeRepository.findAll();
         return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
     }
 
+
+    //delete a particular bike using Id
     @Override
     public ResponseEntity<BikeOutDto> deleteBike(Long id) {
         Bike bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
@@ -83,13 +113,16 @@ public class BikeServiceImpl implements BikeService {
         return ResponseEntity.ok(modelMapper.map(bike, BikeOutDto.class));
     }
 
-    @Override
-    public ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input) {
-        Bike bike=modelMapper.map(input, Bike.class);
-        Bike existingBike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("not bike with such Id"));
-        modelMapper.map(bike,existingBike);
-        existingBike=bikeRepository.save(existingBike);
-        return ResponseEntity.ok(modelMapper.map(existingBike, BikeOutDto.class));
-    }
+
+//    @Override
+//    public ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input) {
+//        Bike bike=modelMapper.map(input, Bike.class);
+//        Bike existingBike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("not bike with such Id"));
+//        modelMapper.map(bike,existingBike);
+//        existingBike=bikeRepository.save(existingBike);
+//        return ResponseEntity.ok(modelMapper.map(existingBike, BikeOutDto.class));
+//    }
+
+
 
 }

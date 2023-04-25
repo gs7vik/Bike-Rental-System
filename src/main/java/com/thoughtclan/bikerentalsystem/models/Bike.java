@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Bike {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "Brand")
@@ -30,12 +30,13 @@ public class Bike {
     @Column(name = "Price_per_hour")
     private Double pricePerHour;
 
-    @Column(name="image_url")
-    private String imageUrl;
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
 
     @ManyToOne
     @JoinColumn(name="vendorId",referencedColumnName = "id")
-    private Vendor vendor;
+    private Vendor vendorId;
 
 
 //test
