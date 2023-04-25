@@ -39,6 +39,7 @@ public class BikeServiceImpl implements BikeService {
     public Double calculatePrice (Double pricePerHour, LocalDateTime fromTime, LocalDateTime toTime){
 
         long hoursBetween = ChronoUnit.HOURS.between(fromTime, toTime);
+
         long minutesBetween = ChronoUnit.MINUTES.between(fromTime,toTime)-(hoursBetween*60);
         double estPrice = (hoursBetween*pricePerHour)+(minutesBetween*(pricePerHour/(60)));
         return estPrice;
@@ -80,6 +81,15 @@ public class BikeServiceImpl implements BikeService {
         Bike bike=bikeRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No bike with such id"));
         bikeRepository.delete(bike);
         return ResponseEntity.ok(modelMapper.map(bike, BikeOutDto.class));
+    }
+
+    @Override
+    public ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input) {
+        Bike bike=modelMapper.map(input, Bike.class);
+        Bike existingBike=bikeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("not bike with such Id"));
+        modelMapper.map(bike,existingBike);
+        existingBike=bikeRepository.save(existingBike);
+        return ResponseEntity.ok(modelMapper.map(existingBike, BikeOutDto.class));
     }
 
 }
