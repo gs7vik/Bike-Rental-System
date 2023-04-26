@@ -81,14 +81,18 @@
             <artifactId>validation-api</artifactId>
             <version>2.0.0.Final</version>
         </dependency>
-        s
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.5</version>
+        </dependency>
 
->>>>>>> 2efe2df5c65bae4ab21de82923ef2364dc5be404
 
     </dependencies>
 
