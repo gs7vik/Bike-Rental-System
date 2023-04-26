@@ -4,15 +4,12 @@ import lombok.Data;
 
 @Data
 public class SignInFireBaseOutput {
-    private String idToken;
 
-    private String email;
+    public String idToken;
+    public String email;
+    public String refreshToken;
+    public String expiresIn;
+    public String localId;
+    public boolean registered;
 
-    private String refreshToken;
-
-    private String expiresIn;
-
-    private String localId;
-
-    private boolean registered;
 }

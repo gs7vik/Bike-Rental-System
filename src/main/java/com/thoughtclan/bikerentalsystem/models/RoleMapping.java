@@ -4,8 +4,6 @@ package com.thoughtclan.bikerentalsystem.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import jakarta.persistence.*;
-
 @Data
 @Entity
 @Table(name="RoleMapping")
