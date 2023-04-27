@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class BikeOutDto {
-    private Integer id;
+    private Long id;
     private String brand;
     private String model;
     private String bikeNumberPlate;

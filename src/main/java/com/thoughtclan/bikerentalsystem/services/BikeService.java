@@ -2,7 +2,7 @@ package com.thoughtclan.bikerentalsystem.services;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
-import com.thoughtclan.bikerentalsystem.models.Bike;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
@@ -28,4 +28,6 @@ public interface BikeService {
     BikeOutDto addBike(BikeInDto bikeDetails);
 
     ResponseEntity<BikeOutDto> updateBike(Long id, BikeInDto bikeDetails);
+
+    List<BikeOutDto> getByStatus(BikeStatus bikeStatus);
 }

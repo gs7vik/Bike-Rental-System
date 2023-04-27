@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.models;
 
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Table(name="bike", uniqueConstraints = @UniqueConstraint(columnNames ={ "bike_number_plate"}))
 public class Bike {
 
     @Id
@@ -24,11 +26,15 @@ public class Bike {
     @Column(name = "Model")
     private String model;
 
-    @Column(nullable = false)
+    @Column(name="bike_number_plate")
     private String bikeNumberPlate;
 
     @Column(name = "Price_per_hour")
     private Double pricePerHour;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BikeStatus bikeStatus=BikeStatus.AVAILABLE;
 
     @Lob
     @Column(name = "image")

@@ -20,7 +20,7 @@ public class BookingOutputDto {
 
     private Double price;
 
-   // private User user;
+    private User user;
 
     private Bike bike;
 

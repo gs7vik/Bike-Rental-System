@@ -12,21 +12,17 @@ public class BookingInputDto {
 
     private Long id;
 
-
-
     @NotNull
     private LocalDateTime startTime;
 
-
-
-
     @NotNull
     private LocalDateTime endTime;
+    private UserInDto user;
 
     private BikeInDto bike;
     private BookingStatus status;
 
-    //private UserInDto user;
+
 
 
 
