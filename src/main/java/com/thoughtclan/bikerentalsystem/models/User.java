@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="user", uniqueConstraints = @UniqueConstraint(columnNames ={ "email","license_no"}))
+
 
 public class User {
     @Id
@@ -18,9 +18,10 @@ public class User {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
-    @Column(name="license_no")
+    @Column(name="license_no",unique = true)
     private String licenseNo;
     @Column(name="contact_no")
     private String contactNo;

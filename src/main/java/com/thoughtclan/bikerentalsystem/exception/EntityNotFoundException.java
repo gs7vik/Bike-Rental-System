@@ -8,6 +8,7 @@ public class EntityNotFoundException extends RuntimeException{
         super(msg);
     }
 
+
     public EntityNotFoundException( String msg, String code ){
         super(msg);
         this.code = code;
