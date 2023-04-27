@@ -2,6 +2,7 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Vendor;
@@ -77,6 +78,11 @@ public class BikeServiceImpl implements BikeService {
         existing_bike=bikeRepository.save(existing_bike);
         return ResponseEntity.ok(modelMapper.map(existing_bike, BikeOutDto.class));
 
+    }
+
+    @Override
+    public List<BikeOutDto> getByStatus(BikeStatus bikeStatus) {
+        return null;
     }
 
 

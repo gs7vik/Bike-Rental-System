@@ -2,6 +2,7 @@ package com.thoughtclan.bikerentalsystem.controllers;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Vendor;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
@@ -52,8 +53,8 @@ public class BikeController {
 //    public ResponseEntity<BikeOutDto> updateBike(@PathVariable long id,@RequestBody BikeInDto input){
 //        return bikeService.updateBike(id,input);
 //    }
-    @PostMapping("/addimage")
-    public BikeOutDto addImage(
+    @PostMapping("/addBike")
+    public BikeOutDto addBike(
         @RequestParam("brand") String brand,
         @RequestParam("model") String model,
         @RequestParam("bikeNumberPlate") String bikeNumberPlate,
@@ -90,6 +91,12 @@ public class BikeController {
         bikeDetails.setImage(imageData);
 
         return bikeService.updateBike(id,bikeDetails);
+    }
+
+    @GetMapping("/getByStatus")
+    public List<BikeOutDto> getByStatus(BikeStatus bikeStatus){
+        return bikeService.getByStatus(bikeStatus);
+
     }
 
 }
