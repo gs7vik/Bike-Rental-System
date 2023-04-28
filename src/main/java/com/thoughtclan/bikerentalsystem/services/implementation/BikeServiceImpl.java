@@ -1,6 +1,7 @@
 package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
+import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
 import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
@@ -81,8 +82,11 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
-    public List<BikeOutDto> getByStatus(BikeStatus bikeStatus) {
-        return null;
+    public List<BikeOutDto> getByStatus(String bikeStatus) {
+        BikeStatus status=BikeStatus.valueOf(bikeStatus);
+
+        List<Bike> bikes=  bikeRepository.findByBikeStatus(status);
+        return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
     }
 
 
@@ -94,7 +98,6 @@ public class BikeServiceImpl implements BikeService {
         existing_bike=bikeRepository.save(existing_bike);
         return modelMapper.map(existing_bike,BikeOutDto.class);
     }
-
 
     //get details of a particular bike
     @Override
