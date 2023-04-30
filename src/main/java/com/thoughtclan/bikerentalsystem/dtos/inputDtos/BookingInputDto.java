@@ -20,7 +20,6 @@ public class BookingInputDto {
     private UserInDto user;
 
     private BikeInDto bike;
-    private BookingStatus status;
 
 
 

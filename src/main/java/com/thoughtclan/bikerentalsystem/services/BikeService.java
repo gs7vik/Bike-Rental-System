@@ -24,7 +24,7 @@ public interface BikeService {
 
     ResponseEntity<BikeOutDto> deleteBike(Long id);
 
-//    ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input);
+    public void updateBikeStatus(Long bikeId);
 
     BikeOutDto addBike(BikeInDto bikeDetails);
 

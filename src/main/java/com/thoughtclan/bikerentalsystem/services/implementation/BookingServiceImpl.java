@@ -49,6 +49,7 @@ public class BookingServiceImpl implements BookingService {
 
             Double price= bikeService.calculatePrice(bike.getPricePerHour(),booking.getStartTime(),booking.getEndTime());
             booking.setTotalPrice(price);
+            bikeService.updateBikeStatus(booking.getBike().getId());
 
 
             bookingRepository.save(booking);

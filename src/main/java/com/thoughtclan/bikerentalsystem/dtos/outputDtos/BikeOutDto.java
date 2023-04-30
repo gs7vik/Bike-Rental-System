@@ -14,6 +14,7 @@ public class BikeOutDto {
     private String bikeNumberPlate;
     private Double pricePerHour;
     private byte[] image;
+    private String bikeStatus;
     private Long vendorId;
 
 }
