@@ -1,62 +1,27 @@
 package com.thoughtclan.bikerentalsystem.models;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Entity
+    @Table(name = "Role")
+    public class Role {
 
-@Entity
-@Table(name="role")
-public class Role {
         @Id
-        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column
         private Long id;
-        @Column(name = "name")
+
+        @Column
         private String name;
-        @Column(name = "description")
-        private String description;
 
 
-    public Role(String name) {
-        this.name = name;
     }
 
-    public Role(){
-        super();
-    }
-    public Role(String name, String description) {
-        this.name = name;
-        this.description = description;
-        }
-
-
-    public Role(String name, String description,List<com.thoughtclan.bikerentalsystem.models.Privileges> Privileges) {
-
-
-        this.name = name;
-        this.description = description;
-        this.Privileges=(List<com.thoughtclan.bikerentalsystem.models.Privileges>) Privileges;
-    }
-    @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name="role_privileges_mapping",joinColumns=@JoinColumn(name="role_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="privileges_id",referencedColumnName="id"))
-    private List<com.thoughtclan.bikerentalsystem.models.Privileges> Privileges;
-    public Long getId() {
-            return id;}
-        public void setId(Long id) {
-            this.id = id;
-        }
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-         public String getDescription() {
-             return description;
-         }
-
-         public void setDescription(String description) {
-            this.description = description;
-        }
-
-    }
 
 

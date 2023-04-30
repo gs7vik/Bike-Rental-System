@@ -1,12 +1,16 @@
-/*
 package com.thoughtclan.bikerentalsystem.filter;
-
 
 
 import com.google.common.net.HttpHeaders;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.ApiMappingOutputDto;
+import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
+import com.thoughtclan.bikerentalsystem.models.User;
+import com.thoughtclan.bikerentalsystem.services.RoleMappingService;
 import com.thoughtclan.bikerentalsystem.services.UserService;
+import com.thoughtclan.bikerentalsystem.services.implementation.ApiMappingServiceImpl;
+import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,7 +69,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                                 filterChain.doFilter(request, response);
                             }
                             else{
-                                throw new ResourceNotFoundException("You Can't Access this api");
+                                throw new EntityNotFoundException("You Can't Access this api");
                             }
                         }
                         catch (Exception e) {
@@ -84,5 +88,3 @@ public class SecurityFilter extends OncePerRequestFilter {
         return publicApis.contains(url);
     }
 }
-
- */

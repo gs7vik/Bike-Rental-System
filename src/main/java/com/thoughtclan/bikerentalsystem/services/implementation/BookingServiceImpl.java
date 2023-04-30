@@ -2,7 +2,6 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
-import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
