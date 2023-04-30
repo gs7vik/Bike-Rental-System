@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByFireBaseId(uid).orElseThrow(()-> new EntityNotFoundException("firebase id not found"));
     }
     public UserOutputDto saveUser(UserInputDto user) {
+
         User user1 = modelMapper.map(user, User.class);
         UserInput userInput = new UserInput();
         userInput.setEmail(user1.getEmail());

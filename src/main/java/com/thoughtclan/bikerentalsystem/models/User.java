@@ -22,7 +22,7 @@ import java.util.Date;
 @Validated
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
@@ -30,6 +30,7 @@ public class User {
     @NotBlank
     @Size(min=3,message = "Please enter name with atleast 3 characters")
     private String firstName;
+
 
     @Column
     private String fireBaseId;

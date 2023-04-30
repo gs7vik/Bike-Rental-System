@@ -5,6 +5,7 @@ import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
+import com.thoughtclan.bikerentalsystem.models.User;
 import com.thoughtclan.bikerentalsystem.repositories.*;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.services.BookingService;

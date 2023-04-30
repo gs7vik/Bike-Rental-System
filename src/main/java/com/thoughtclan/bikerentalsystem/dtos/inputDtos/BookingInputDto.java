@@ -17,7 +17,7 @@ public class BookingInputDto {
 
     @NotNull
     private LocalDateTime endTime;
-    private UserInDto user;
+    private UserInputDto user;
 
     private BikeInDto bike;
     private BookingStatus status;
