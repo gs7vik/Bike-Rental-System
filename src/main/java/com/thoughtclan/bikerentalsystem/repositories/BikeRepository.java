@@ -12,5 +12,5 @@ public interface BikeRepository extends JpaRepository<Bike,Long> {
 
     List<Bike> findByVendorIdId(Long id);
 
-    //List<Bike> findByStatus(BikeStatus bikeStatus);
+    List<Bike> findByBikeStatus(BikeStatus bikeStatus);
 }

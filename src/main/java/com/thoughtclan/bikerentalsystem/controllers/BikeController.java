@@ -93,14 +93,10 @@ public class BikeController {
         return bikeService.updateBike(id,bikeDetails);
     }
 
-    @GetMapping("/getByStatus")
-    public List<BikeOutDto> getByStatus(BikeStatus bikeStatus){
+    @GetMapping("/getByStatus/{bikeStatus}")
+    public List<BikeOutDto> getByStatus(@PathVariable(name = "bikeStatus")String bikeStatus){
         return bikeService.getByStatus(bikeStatus);
 
     }
 
 }
-
-
-
-
