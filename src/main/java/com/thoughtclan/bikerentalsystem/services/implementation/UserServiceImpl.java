@@ -6,10 +6,7 @@ import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInput;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.SignInFireBaseOutput;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutDto;
-import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.*;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Role;
 import com.thoughtclan.bikerentalsystem.models.User;
@@ -134,5 +131,12 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(CurrentUser.get(),UserOutputDto.class);
 
     }
+    @Override
+    public ResponseEntity<UserOutputDto>deleteUser(Long id){
+        User user=userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("booking with given id not found"));
+        userRepository.delete(user);
+        return ResponseEntity.ok(modelMapper.map(user,UserOutputDto.class));
+    }
+
 
 }
