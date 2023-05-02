@@ -26,6 +26,7 @@ public class UserController {
         return userService.saveUser(registrationDto);
         }
 
+
     public boolean verifyUser(@RequestBody UserInDto user){
         return true;
     }
@@ -47,4 +48,18 @@ public class UserController {
         return userService.login(input);
     }
 
+    @PatchMapping("/{id}")
+    public UserOutDto partialUpdateUser(@PathVariable Long id,@RequestBody UserInDto user){
+        return userService.partialUpdate(id,user);
+    }
+
+    @GetMapping("/me")
+    public UserOutDto userMe(){
+        return userService.userMe();
+    }
+
+    @PatchMapping("{userId}/map-role")
+    public UserOutDto mapRoleToUser(@PathVariable Long userId, @RequestParam Long roleId){
+        return userService.mapRole(userId, roleId);
+    }
 }

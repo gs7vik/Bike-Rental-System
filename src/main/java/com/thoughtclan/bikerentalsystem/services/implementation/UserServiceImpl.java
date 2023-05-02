@@ -14,6 +14,7 @@ import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
 import com.thoughtclan.bikerentalsystem.services.FireBaseService;
 import com.thoughtclan.bikerentalsystem.services.UserService;
+import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -42,7 +43,13 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     private final FireBaseService fireBaseService;
-
+//    public UserOutDto mapRole(Long userId, Long roleId){
+//        User user = userRepository.findById(userId).orElse(null);
+//        Role role = roleRepository.findById(roleId).orElse(null);
+//        user.setRole(role);
+//        userRepository.save(user);
+//        return modelMapper.map(user, UserOutDto.class);
+//    }
     @Override
     public LoginOutputDto login(LoginInputDto input) {
         System.out.println(FIREBASE_URL);
@@ -104,5 +111,7 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(existingUser, UserOutDto.class);
     }
 
-
+    public UserOutDto userMe(){
+        return modelMapper.map(CurrentUser.get(),UserOutDto.class);
+    }
 }

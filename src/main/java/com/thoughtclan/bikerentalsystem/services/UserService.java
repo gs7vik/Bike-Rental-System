@@ -25,5 +25,5 @@ public interface UserService {
 
     //public LoginDto login(LoginInputDto input);
 
-
+    UserOutDto userMe();
 }
