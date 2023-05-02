@@ -22,7 +22,7 @@ import java.util.Date;
 @Validated
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
 
