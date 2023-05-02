@@ -9,10 +9,11 @@ import com.thoughtclan.bikerentalsystem.repositories.ApiMappingRepository;
 import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.services.ApiMappingService;
 import com.thoughtclan.bikerentalsystem.services.RoleService;
+import com.thoughtclan.bikerentalsystem.utils.HttpMethod;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,6 +32,7 @@ public class ApiMappingServiceImpl implements ApiMappingService {
 
     @Override
     public ApiMappingOutputDto createApiMapping(ApiMappingInputDto input) {
+
         ApiMapping apiMapping = modelMapper.map(input, ApiMapping.class);
         apiMapping = apiMappingRepository.save(apiMapping);
         return modelMapper.map(apiMapping, ApiMappingOutputDto.class);
@@ -50,7 +52,7 @@ public class ApiMappingServiceImpl implements ApiMappingService {
 
     }
 
-    public ApiMappingOutputDto getAllPermissions(HttpMethod httpMethod,String url){
+    public ApiMappingOutputDto getAllPermissions(HttpMethod httpMethod, String url){
         ApiMapping apiMapping = apiMappingRepository.findByHttpMethodAndUrl(httpMethod, url).orElseThrow(()->new RuntimeException());
         System.out.println(apiMapping);
         return modelMapper.map(apiMapping,ApiMappingOutputDto.class);

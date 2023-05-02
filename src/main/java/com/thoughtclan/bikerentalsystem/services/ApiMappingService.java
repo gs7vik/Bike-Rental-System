@@ -2,7 +2,8 @@ package com.thoughtclan.bikerentalsystem.services;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.ApiMappingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.ApiMappingOutputDto;
-import org.springframework.http.HttpMethod;
+import com.thoughtclan.bikerentalsystem.utils.HttpMethod;
+
 
 public interface ApiMappingService {
     public ApiMappingOutputDto createApiMapping(ApiMappingInputDto input);

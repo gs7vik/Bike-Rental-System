@@ -4,7 +4,7 @@ import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.User;
 
 public class CurrentUser {
-    private static final ThreadLocal<User> threadUser = new ThreadLocal<User>();
+    private static final ThreadLocal<User> threadUser = new ThreadLocal<>();
 
     public static void set(User user) {threadUser.set(user);}
 

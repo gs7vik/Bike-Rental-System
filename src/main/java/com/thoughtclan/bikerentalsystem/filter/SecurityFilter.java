@@ -11,6 +11,7 @@ import com.thoughtclan.bikerentalsystem.services.RoleMappingService;
 import com.thoughtclan.bikerentalsystem.services.UserService;
 import com.thoughtclan.bikerentalsystem.services.implementation.ApiMappingServiceImpl;
 import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
+import com.thoughtclan.bikerentalsystem.utils.HttpMethod;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 
 
@@ -45,7 +46,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
         else {
             String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-            HttpMethod method = HttpMethod.valueOf(request.getMethod());
+            com.thoughtclan.bikerentalsystem.utils.HttpMethod method = HttpMethod.valueOf(request.getMethod());
             String uri = request.getRequestURI();
             uri = uri.replaceAll("[0-9]+","{id}");
 

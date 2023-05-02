@@ -19,6 +19,7 @@ import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
 import com.thoughtclan.bikerentalsystem.services.FireBaseService;
 import com.thoughtclan.bikerentalsystem.services.UserService;
+import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -63,8 +64,13 @@ public class UserServiceImpl implements UserService {
         userInput.setPassword(user1.getPassword());
         userInput.setName(user.getFirstName());
 
+
         UserRecord userRecord = fireBaseService.createInFireBase(userInput);
         user1.setFireBaseId(userRecord.getUid());
+
+
+
+
         Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         user1.setRole(role);
 
@@ -102,6 +108,13 @@ public class UserServiceImpl implements UserService {
         loginOutputDto.setExpiresIn(signInFireBaseOutput.getExpiresIn());
 
         return loginOutputDto;
+    }
+
+
+    @Override
+    public UserOutputDto userMe(){
+        return modelMapper.map(CurrentUser.get(),UserOutputDto.class);
+
     }
 
 }

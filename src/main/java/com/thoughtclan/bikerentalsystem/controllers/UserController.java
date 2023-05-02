@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -40,6 +41,9 @@ public class UserController {
     public LoginOutputDto login(@RequestBody LoginInputDto input){
         return userService.login(input);
     }
+
+    @GetMapping("/me")
+    public UserOutputDto userMe(){return userService.userMe();}
 
 
 

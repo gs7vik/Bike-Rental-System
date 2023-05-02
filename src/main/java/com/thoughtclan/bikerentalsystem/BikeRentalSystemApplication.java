@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan
+
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class BikeRentalSystemApplication {
 
