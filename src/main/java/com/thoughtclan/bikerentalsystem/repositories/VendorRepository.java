@@ -9,4 +9,6 @@ import java.util.List;
 
 @Repository
 public interface VendorRepository extends JpaRepository<Vendor,Long> {
+    List<Vendor> findByEmail(String email);
+    List<Vendor> findByContactNo(String ContactNo);
 }

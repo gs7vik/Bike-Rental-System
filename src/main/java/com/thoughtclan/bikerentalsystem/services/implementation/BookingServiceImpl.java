@@ -5,6 +5,7 @@ import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
+import com.thoughtclan.bikerentalsystem.models.User;
 import com.thoughtclan.bikerentalsystem.repositories.*;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.services.BookingService;
@@ -38,17 +39,16 @@ public class BookingServiceImpl implements BookingService {
     public BookingOutputDto saveBooking(BookingInputDto bookingInputDto) {
             Booking booking=modelMapper.map(bookingInputDto, Booking.class);
 
-          /*  User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
+            User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
             booking.setUser(user);
 
-           */
           Bike bike = bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
            booking.setBike(bike);
 
 
             Double price= bikeService.calculatePrice(bike.getPricePerHour(),booking.getStartTime(),booking.getEndTime());
             booking.setTotalPrice(price);
-
+            bikeService.updateBikeStatus(booking.getBike().getId());
 
 
             bookingRepository.save(booking);

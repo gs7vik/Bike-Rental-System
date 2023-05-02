@@ -1,7 +1,8 @@
 package com.thoughtclan.bikerentalsystem.dtos.outputDtos;
 
+import com.thoughtclan.bikerentalsystem.utils.HttpMethod;
 import lombok.Data;
-import org.springframework.http.HttpMethod;
+
 
 @Data
 public class ApiMappingOutputDto {

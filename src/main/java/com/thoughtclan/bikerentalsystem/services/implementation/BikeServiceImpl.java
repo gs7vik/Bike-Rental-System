@@ -2,10 +2,14 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
+import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
+import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.models.Vendor;
 import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
+import com.thoughtclan.bikerentalsystem.repositories.BookingRepository;
 import com.thoughtclan.bikerentalsystem.repositories.VendorRepository;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
@@ -28,6 +32,8 @@ public class BikeServiceImpl implements BikeService {
     private final PatchMapper patchMapper;
     private final BikeRepository bikeRepository;
     private final VendorRepository vendorRepository;
+
+    private final BookingRepository bookingRepository;
 
 
     //Get the bikes added by a particular Vendor
@@ -79,6 +85,22 @@ public class BikeServiceImpl implements BikeService {
 
     }
 
+    @Override
+    public List<BikeOutDto> getByStatus(String bikeStatus) {
+        BikeStatus status=BikeStatus.valueOf(bikeStatus);
+
+        List<Bike> bikes=  bikeRepository.findByBikeStatus(status);
+        return bikes.stream().map(orders->modelMapper.map(orders,BikeOutDto.class)).collect(Collectors.toList());
+    }
+    public void updateBikeStatus(Long bikeId){
+        Bike bike=bikeRepository.findById(bikeId).orElseThrow(()->new EntityNotFoundException("No bike found"));
+        List<Booking> bookings=bookingRepository.findByIdAndBookingStatus(bikeId, BookingStatus.BOOKED);
+        if(!bookings.isEmpty()) {
+            bike.setBikeStatus(BikeStatus.UNDER_BOOKING);
+        }
+        bikeRepository.save(bike);
+    }
+
 
     //partial updating of bike
     public BikeOutDto updatePrice(Long id,BikeInDto input) {
@@ -88,7 +110,6 @@ public class BikeServiceImpl implements BikeService {
         existing_bike=bikeRepository.save(existing_bike);
         return modelMapper.map(existing_bike,BikeOutDto.class);
     }
-
 
     //get details of a particular bike
     @Override

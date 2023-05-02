@@ -2,6 +2,7 @@ package com.thoughtclan.bikerentalsystem.services;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BikeInDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BikeOutDto;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import org.springframework.http.ResponseEntity;
 
@@ -23,9 +24,11 @@ public interface BikeService {
 
     ResponseEntity<BikeOutDto> deleteBike(Long id);
 
-//    ResponseEntity<BikeOutDto> updateBike(Long id,BikeInDto input);
+    public void updateBikeStatus(Long bikeId);
 
     BikeOutDto addBike(BikeInDto bikeDetails);
 
     ResponseEntity<BikeOutDto> updateBike(Long id, BikeInDto bikeDetails);
+
+    public List<BikeOutDto> getByStatus(String bikeStatus);
 }

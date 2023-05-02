@@ -10,4 +10,6 @@ public class RoleInputDto {
 
     private Long id;
     private String name;
+
 }
+

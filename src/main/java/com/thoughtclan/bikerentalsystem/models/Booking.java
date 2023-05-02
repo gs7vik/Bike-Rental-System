@@ -1,6 +1,7 @@
 package com.thoughtclan.bikerentalsystem.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.thoughtclan.bikerentalsystem.enums.BikeStatus;
 import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,8 +32,10 @@ public class Booking {
     private LocalDateTime endTime;
 
     private Double totalPrice;
-    @Column
-    private BookingStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookingStatus bookingStatus=BookingStatus.BOOKED;
 
     @ManyToOne
     @JoinColumn(name="user_id",referencedColumnName = "id")

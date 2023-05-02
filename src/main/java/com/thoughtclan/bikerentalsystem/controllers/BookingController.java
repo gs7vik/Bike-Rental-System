@@ -1,6 +1,5 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 
-
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.services.implementation.BookingServiceImpl;
@@ -18,6 +17,7 @@ import java.util.List;
 public class BookingController {
 
     private final BookingServiceImpl bookingService;
+
 
 
     @PostMapping

@@ -1,12 +1,15 @@
 package com.thoughtclan.bikerentalsystem.services.implementation;
 
+import com.google.firebase.auth.UserRecord;
 import com.google.gson.Gson;
-import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInDto;
+import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInput;
+import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.SignInFireBaseOutput;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Role;
 import com.thoughtclan.bikerentalsystem.models.User;
@@ -17,7 +20,6 @@ import com.thoughtclan.bikerentalsystem.services.UserService;
 import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,30 +28,64 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private static final String FIREBASE_URL ="https://identitytoolkit.googleapis.com/v1/accounts" ;
     private static final String FIREBASE_API_KEY = "AIzaSyAVehVl9wrJAYLwoCiQknV7Hu18-UQP-1k";
 
     private final UserRepository userRepository;
-    private final PatchMapper patchMapper;
+
 
     private final ModelMapper modelMapper;
+
+
+    private final PatchMapper patchMapper;
+
+
+
     private final RoleRepository roleRepository;
 
     private final FireBaseService fireBaseService;
-//    public UserOutDto mapRole(Long userId, Long roleId){
-//        User user = userRepository.findById(userId).orElse(null);
-//        Role role = roleRepository.findById(roleId).orElse(null);
-//        user.setRole(role);
-//        userRepository.save(user);
-//        return modelMapper.map(user, UserOutDto.class);
-//    }
+
+
+    @Override
+    public User getByFireBaseId(String uid){
+        return userRepository.findByFireBaseId(uid).orElseThrow(()-> new EntityNotFoundException("firebase id not found"));
+    }
+    public UserOutputDto saveUser(UserInputDto user) {
+
+        User user1 = modelMapper.map(user, User.class);
+        UserInput userInput = new UserInput();
+        userInput.setEmail(user1.getEmail());
+        userInput.setPassword(user1.getPassword());
+        userInput.setName(user.getFirstName());
+
+
+        UserRecord userRecord = fireBaseService.createInFireBase(userInput);
+        user1.setFireBaseId(userRecord.getUid());
+
+
+
+
+        Role role = roleRepository.findById(user.getRoleId()).orElse(null);
+        user1.setRole(role);
+
+
+        user1 = userRepository.save(user1);
+        UserOutputDto user3 =  modelMapper.map(user1, UserOutputDto.class);
+        return user3;
+    }
+
+    public UserOutputDto getUser(Long id) {
+        User user1 = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
+        return modelMapper.map(user1, UserOutputDto.class);
+    }
+
     @Override
     public LoginOutputDto login(LoginInputDto input) {
         System.out.println(FIREBASE_URL);
@@ -74,25 +110,7 @@ public class UserServiceImpl implements UserService {
 
         return loginOutputDto;
     }
-    @Override
-    public User getByFireBaseId(String uid){
-        return userRepository.findByFireBaseId(uid).orElseThrow(()-> new ResourceNotFoundException("firebase id not found"));
-    }
 
-    @Override
-        public User saveUser(UserRegistrationDto registrationDto) {
-            User user=new User(registrationDto.getFirstName(),registrationDto.getLastName(),registrationDto.getEmail(),registrationDto.getPassword(),registrationDto.getLicenseNo(),registrationDto.getContactNo(), Arrays.asList(new Role("USER")));
-            return userRepository.save(user);
-
-        }
-
-
-    @Override
-
-    public UserOutDto getUser(Long id) {
-        User user1 = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
-        return modelMapper.map(user1, UserOutDto.class);
-    }
     @Override
     public UserOutDto partialUpdateUser(UserInDto input, Long id) {
         User users=modelMapper.map(input, User.class);
@@ -111,7 +129,10 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(existingUser, UserOutDto.class);
     }
 
-    public UserOutDto userMe(){
-        return modelMapper.map(CurrentUser.get(),UserOutDto.class);
+    @Override
+    public UserOutputDto userMe(){
+        return modelMapper.map(CurrentUser.get(),UserOutputDto.class);
+
     }
+
 }

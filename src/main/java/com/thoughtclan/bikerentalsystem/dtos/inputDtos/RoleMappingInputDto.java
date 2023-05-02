@@ -7,4 +7,3 @@ public class RoleMappingInputDto {
         private Long roleId;
         private Long apiId;
     }
-
