@@ -33,13 +33,12 @@ public class UserController {
         return userService.getUser(id);
     }
 
-
-
-  
     @PostMapping("/login")
     public LoginOutputDto login(@RequestBody LoginInputDto input){
         return userService.login(input);
     }
+
+
 
 
 

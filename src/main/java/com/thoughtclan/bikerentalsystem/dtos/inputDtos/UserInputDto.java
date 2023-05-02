@@ -12,29 +12,12 @@ import java.util.Date;
 public class UserInputDto {
 
     private Long id;
-
     private String firstName;
-
-
     private String lastName;
-
-
     private String email;
-
-
-
     private String password;
-
-
-
     private Date dob;
-
-
     private String drivingLicense;
-
-
     private String idProof;
-
-
     private Long roleId;
 }

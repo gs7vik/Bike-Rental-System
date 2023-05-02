@@ -19,6 +19,7 @@ import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
 import com.thoughtclan.bikerentalsystem.services.FireBaseService;
 import com.thoughtclan.bikerentalsystem.services.UserService;
+import com.thoughtclan.bikerentalsystem.utils.CurrentUser;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -55,6 +56,9 @@ public class UserServiceImpl implements UserService {
     public User getByFireBaseId(String uid){
         return userRepository.findByFireBaseId(uid).orElseThrow(()-> new EntityNotFoundException("firebase id not found"));
     }
+
+
+
     public UserOutputDto saveUser(UserInputDto user) {
 
         User user1 = modelMapper.map(user, User.class);
@@ -68,8 +72,8 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         user1.setRole(role);
 
-
         user1 = userRepository.save(user1);
+
         UserOutputDto user3 =  modelMapper.map(user1, UserOutputDto.class);
         return user3;
     }
@@ -88,6 +92,8 @@ public class UserServiceImpl implements UserService {
         map.put("email",input.getEmail());
         map.put("password",input.getPassword());
         map.put("returnSecureToken",true);
+        System.out.println("User Logged in successfully !!!");
+        System.out.println(CurrentUser.get());
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();

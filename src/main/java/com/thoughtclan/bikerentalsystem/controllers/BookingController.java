@@ -1,10 +1,13 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 
 
+import com.google.firebase.auth.UserRecord;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
+import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInput;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
+import com.thoughtclan.bikerentalsystem.services.FireBaseService;
 import com.thoughtclan.bikerentalsystem.services.implementation.BookingServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
