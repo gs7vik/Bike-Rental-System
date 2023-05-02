@@ -67,8 +67,13 @@ public class UserServiceImpl implements UserService {
         userInput.setPassword(user1.getPassword());
         userInput.setName(user.getFirstName());
 
+
         UserRecord userRecord = fireBaseService.createInFireBase(userInput);
         user1.setFireBaseId(userRecord.getUid());
+
+
+
+
         Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         user1.setRole(role);
 
@@ -108,6 +113,13 @@ public class UserServiceImpl implements UserService {
         loginOutputDto.setExpiresIn(signInFireBaseOutput.getExpiresIn());
 
         return loginOutputDto;
+    }
+
+
+    @Override
+    public UserOutputDto userMe(){
+        return modelMapper.map(CurrentUser.get(),UserOutputDto.class);
+
     }
 
 }

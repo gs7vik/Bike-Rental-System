@@ -16,4 +16,6 @@ public interface UserService {
 
     User getByFireBaseId(String uid);
 
+     UserOutputDto userMe();
+
 }
