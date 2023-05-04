@@ -40,9 +40,13 @@ public class Bike {
     @Column(name = "image")
     private byte[] image;
 
+//    @ManyToOne
+//    @JoinColumn(name="vendorId",referencedColumnName = "id")
+//    private Vendor vendorId;
+
     @ManyToOne
     @JoinColumn(name="vendorId",referencedColumnName = "id")
-    private Vendor vendorId;
+    private User userId;
 
 
 //test

@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
     private final PatchMapper patchMapper;
 
 
-
     private final RoleRepository roleRepository;
 
     private final FireBaseService fireBaseService;
@@ -66,14 +65,8 @@ public class UserServiceImpl implements UserService {
         userInput.setEmail(user1.getEmail());
         userInput.setPassword(user1.getPassword());
         userInput.setName(user.getFirstName());
-
-
         UserRecord userRecord = fireBaseService.createInFireBase(userInput);
         user1.setFireBaseId(userRecord.getUid());
-
-
-
-
         Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         user1.setRole(role);
 
@@ -97,8 +90,6 @@ public class UserServiceImpl implements UserService {
         map.put("email",input.getEmail());
         map.put("password",input.getPassword());
         map.put("returnSecureToken",true);
-        System.out.println("User Logged in successfully !!!");
-        System.out.println(CurrentUser.get());
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();

@@ -59,14 +59,14 @@ public class BikeController {
         @RequestParam("model") String model,
         @RequestParam("bikeNumberPlate") String bikeNumberPlate,
         @RequestParam("pricePerHour") Double pricePerHour,
-        @RequestParam("vendorId") Long vendorId,
+        @RequestParam("vendorId") Long userId,
         @RequestParam("image") MultipartFile image) throws IOException {
         BikeInDto bikeDetails = new BikeInDto();
            bikeDetails.setBrand(brand);
            bikeDetails.setModel(model);
            bikeDetails.setBikeNumberPlate(bikeNumberPlate);
            bikeDetails.setPricePerHour(pricePerHour);
-           bikeDetails.setVendorId(vendorId);
+           bikeDetails.setUserId(userId);
             byte[] imageData = image.getBytes();
            bikeDetails.setImage(imageData);
 
@@ -78,7 +78,7 @@ public class BikeController {
          @RequestParam("model") String model,
          @RequestParam("bikeNumberPlate") String bikeNumberPlate,
           @RequestParam("pricePerHour") Double pricePerHour,
-          @RequestParam("vendorId") Long vendorId,
+          @RequestParam("vendorId") Long userId,
          @RequestParam("image") MultipartFile image) throws IOException {
         BikeInDto bikeDetails = new BikeInDto();
         bikeDetails.setId(id);
@@ -86,7 +86,7 @@ public class BikeController {
         bikeDetails.setModel(model);
         bikeDetails.setBikeNumberPlate(bikeNumberPlate);
         bikeDetails.setPricePerHour(pricePerHour);
-        bikeDetails.setVendorId(vendorId);
+        bikeDetails.setUserId(userId);
         byte[] imageData = image.getBytes();
         bikeDetails.setImage(imageData);
 

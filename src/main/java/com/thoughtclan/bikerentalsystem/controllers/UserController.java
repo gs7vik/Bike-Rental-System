@@ -42,10 +42,4 @@ public class UserController {
     @GetMapping("/me")
     public UserOutputDto userMe(){return userService.userMe();}
 
-
-
-
-
-
-
 }
