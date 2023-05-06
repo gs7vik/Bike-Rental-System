@@ -7,6 +7,7 @@ import com.thoughtclan.bikerentalsystem.models.Booking;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
@@ -18,6 +19,8 @@ public interface BookingService {
     public List<BookingOutputDto> getAllBookings();
 
     public ResponseEntity<BookingOutputDto> deleteBooking(Long id);
+
+    public Boolean isBikeAvailable(LocalDateTime startTime,LocalDateTime endTime,Long id);
 
     //public List<BookingOutputDto> getBookingByStatus(BookingStatus bookingStatus);
 

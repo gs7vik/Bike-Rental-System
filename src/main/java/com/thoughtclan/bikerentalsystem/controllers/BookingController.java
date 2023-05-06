@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -46,6 +47,16 @@ public class BookingController {
 
     }
     */
+    @GetMapping("/isAvailable")
+    public Boolean isBikeAvailable(@RequestParam("sTime") LocalDateTime startTime,
+            @RequestParam("eTime") LocalDateTime endTime,
+            @RequestParam("id") Long id ){
+                    return bookingService.isBikeAvailable(startTime,endTime,id);}
+
+
+
+
+
 
 
 
