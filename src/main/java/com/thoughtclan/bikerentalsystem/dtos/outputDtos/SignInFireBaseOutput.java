@@ -14,5 +14,8 @@ public class SignInFireBaseOutput {
 
     private String localId;
 
+    private String displayName;
+    private String roleName;
+
     private boolean registered;
 }

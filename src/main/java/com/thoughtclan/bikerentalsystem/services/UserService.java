@@ -2,10 +2,13 @@ package com.thoughtclan.bikerentalsystem.services;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.models.User;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface UserService {
     public UserOutputDto saveUser(UserInputDto user);
@@ -20,4 +23,6 @@ public interface UserService {
      UserOutputDto userMe();
 
     ResponseEntity<UserOutputDto> updateUser(Long id, UserInputDto input);
+
+    List<BookingOutputDto> getUserBookings(Long id);
 }
