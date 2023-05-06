@@ -53,10 +53,10 @@ public class User {
     private Date dob;
 
     @Column
-    private String drivingLicense;
+    private String licenseNo;
 
     @Column
-    private String idProof;
+    private String contactNo;
 
     @ManyToOne
     @JoinColumn(name="role_id",referencedColumnName = "id")
