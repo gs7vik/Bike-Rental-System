@@ -4,6 +4,7 @@ package com.thoughtclan.bikerentalsystem.controllers;
 import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.services.implementation.UserServiceImpl;
@@ -40,7 +41,6 @@ public class UserController {
        return userService.updateUser(id,input);
     }
 
-
     @PostMapping("/login")
     public LoginOutputDto login(@RequestBody LoginInputDto input){
         return userService.login(input);
@@ -49,4 +49,8 @@ public class UserController {
     @GetMapping("/me")
     public UserOutputDto userMe(){return userService.userMe();}
 
+    @GetMapping("/userBookings/{id}")
+    public List<BookingOutputDto> getUserBookings(@PathVariable Long id){
+        return userService.getUserBookings(id);
+    }
 }

@@ -11,5 +11,6 @@ public class LoginOutputDto {
     private String expiresIn;
 
     private String username;
+    private Long userId;
 
 }

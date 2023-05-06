@@ -1,7 +1,9 @@
 package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 import com.google.firebase.auth.UserRecord;
@@ -9,12 +11,15 @@ import com.google.gson.Gson;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInput;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
+import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.SignInFireBaseOutput;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
+import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.models.Role;
 import com.thoughtclan.bikerentalsystem.models.User;
+import com.thoughtclan.bikerentalsystem.repositories.BookingRepository;
 import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
 import com.thoughtclan.bikerentalsystem.services.FireBaseService;
@@ -44,8 +49,7 @@ public class UserServiceImpl implements UserService {
 
 
     private final PatchMapper patchMapper;
-
-
+    private final BookingRepository bookingRepository;
     private final RoleRepository roleRepository;
 
     private final FireBaseService fireBaseService;
@@ -120,6 +124,14 @@ public class UserServiceImpl implements UserService {
         modelMapper.map(user,existingUser);
         existingUser=userRepository.save(existingUser);
         return ResponseEntity.ok(modelMapper.map(existingUser,UserOutputDto.class));
+    }
+
+    @Override
+    public List<BookingOutputDto> getUserBookings(Long id) {
+        List<Booking> userBookings=bookingRepository.findByUserId(id);
+        List<BookingOutputDto> bookings;
+        bookings=userBookings.stream().map(userBookings1->modelMapper.map(userBookings1, BookingOutputDto.class)).collect(Collectors.toList());
+        return bookings;
     }
 
 }
