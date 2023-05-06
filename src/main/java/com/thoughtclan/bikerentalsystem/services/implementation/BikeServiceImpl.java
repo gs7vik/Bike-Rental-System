@@ -146,5 +146,37 @@ public class BikeServiceImpl implements BikeService {
 //    }
 
 
+    public List<Bike> getAllAvailableVehicles(List<Bike>bikes,LocalDateTime fromTime,LocalDateTime toTime){
+        List<Booking> bookings=bookingRepository.findAll();
+        boolean cond=true;
+        Booking booking=null;
+        for(int i=0;i<bookings.size();i++){
+            booking=bookings.get(i);
+            LocalDateTime ftime=booking.getStartTime();
+            LocalDateTime ttime=booking.getEndTime();
+
+            if(ftime.equals(fromTime) || ftime.equals(toTime)){
+                cond=false;
+            }
+            else if(ttime.equals(fromTime) || ttime.equals(toTime)){
+                cond=false;
+            }
+            else if(fromTime.isAfter(ftime) && toTime.isBefore(ftime)){
+                cond = false;
+            }
+            else if(fromTime.isAfter(ttime) && toTime.isBefore(ttime)){
+                cond = false;
+            }
+
+            if(!cond){
+                Bike bike1 = booking.getBike();
+                bookings.remove(bike1);
+            }
+
+        }
+            return  bikes;
+    }
+
+
 
 }
