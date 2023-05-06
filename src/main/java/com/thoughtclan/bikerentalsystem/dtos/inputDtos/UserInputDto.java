@@ -30,10 +30,10 @@ public class UserInputDto {
     private Date dob;
 
 
-    private String drivingLicense;
+    private String licenseNo;
 
 
-    private String idProof;
+    private String contactNo;
 
 
     private Long roleId;
