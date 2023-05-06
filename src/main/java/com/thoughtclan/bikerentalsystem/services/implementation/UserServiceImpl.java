@@ -101,7 +101,25 @@ public class UserServiceImpl implements UserService {
         LoginOutputDto loginOutputDto = new LoginOutputDto();
         loginOutputDto.setAccessToken(signInFireBaseOutput.getIdToken());
         loginOutputDto.setRefreshToken(signInFireBaseOutput.getRefreshToken());
+
         loginOutputDto.setExpiresIn(signInFireBaseOutput.getExpiresIn());
+
+
+        Role role = userRepository.findByEmail(input.getEmail()).getRole();
+        loginOutputDto.setRoleId(role.getId());
+
+        loginOutputDto.setName(role.getName());
+
+        loginOutputDto.setUserName(userRepository.findByEmail(input.getEmail()).getFirstName());
+
+        loginOutputDto.setId(userRepository.findByEmail(input.getEmail()).getId());
+        /*
+        loginOutputDto.setRole(role);
+
+        loginOutputDto.setUser(userRepository.findByEmail(input.getEmail()));
+        */
+
+
 
         return loginOutputDto;
     }

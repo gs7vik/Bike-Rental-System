@@ -14,8 +14,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.thoughtclan.bikerentalsystem.enums.BookingStatus.BOOKED;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +29,7 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
 
-   private final PrivilegesRepository privilegesRepository;
+    private final PrivilegesRepository privilegesRepository;
 
     private final UserRepository userRepository;
 
@@ -35,47 +38,73 @@ public class BookingServiceImpl implements BookingService {
     private final RoleRepository roleRepository;
 
     private final ModelMapper modelMapper;
+
     @Override
     public BookingOutputDto saveBooking(BookingInputDto bookingInputDto) {
-            Booking booking=modelMapper.map(bookingInputDto, Booking.class);
+        Booking booking = modelMapper.map(bookingInputDto, Booking.class);
 
-            User user=userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
-            booking.setUser(user);
+        User user = userRepository.findById(bookingInputDto.getUser().getId()).orElse(null);
+        booking.setUser(user);
 
-          Bike bike = bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
-           booking.setBike(bike);
-
-
-            Double price= bikeService.calculatePrice(bike.getPricePerHour(),booking.getStartTime(),booking.getEndTime());
-            booking.setTotalPrice(price);
-
-            bikeService.updateBikeStatus(booking.getBike().getId());
+        Bike bike = bikeRepository.findById(bookingInputDto.getBike().getId()).orElse(null);
+        booking.setBike(bike);
 
 
-            bookingRepository.save(booking);
-            this.modelMapper.map(booking, BookingOutputDto.class);
+        Double price = bikeService.calculatePrice(bike.getPricePerHour(), booking.getStartTime(), booking.getEndTime());
+        booking.setTotalPrice(price);
+        bikeService.updateBikeStatus(booking.getBike().getId());
+
+
+        bookingRepository.save(booking);
+        this.modelMapper.map(booking, BookingOutputDto.class);
         BookingOutputDto fnvlrnvlnb = modelMapper.map(booking, BookingOutputDto.class);
-            return fnvlrnvlnb;
+        return fnvlrnvlnb;
     }
 
     @Override
-    public BookingOutputDto getBooking(Long id){
-        Booking booking=bookingRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Booking with "+id+"is not found"));
-        return modelMapper.map(booking,BookingOutputDto.class);
+    public BookingOutputDto getBooking(Long id) {
+        Booking booking = bookingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Booking with " + id + "is not found"));
+        return modelMapper.map(booking, BookingOutputDto.class);
     }
 
     @Override
-    public List<BookingOutputDto> getAllBookings(){
-        List<Booking> booking=bookingRepository.findAll();
-        return booking.stream().map(orders->modelMapper.map(orders,BookingOutputDto.class)).collect(Collectors.toList());
+    public List<BookingOutputDto> getAllBookings() {
+        List<Booking> booking = bookingRepository.findAll();
+        return booking.stream().map(orders -> modelMapper.map(orders, BookingOutputDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public ResponseEntity<BookingOutputDto>deleteBooking(Long id){
-                Booking booking=bookingRepository.findById(id).orElseThrow(()->new EntityNotFoundException("booking with given id not found"));
-                bookingRepository.delete(booking);
-                return ResponseEntity.ok(modelMapper.map(booking,BookingOutputDto.class));
+    public ResponseEntity<BookingOutputDto> deleteBooking(Long id) {
+        Booking booking = bookingRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("booking with given id not found"));
+        bookingRepository.delete(booking);
+        return ResponseEntity.ok(modelMapper.map(booking, BookingOutputDto.class));
     }
+
+    public Boolean isBikeAvailable(LocalDateTime fromTime, LocalDateTime toTime, Long id) {
+        Bike bike = bikeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("bike with given id not found"));
+        List<Booking> booking = bookingRepository.findByBikeId(id);
+        boolean cond = true;
+
+        for (Booking b : booking) {
+                if(b.getBookingStatus()!=BOOKED){
+                    continue;
+                }
+
+            LocalDateTime ftime = b.getStartTime();
+            LocalDateTime ttime = b.getEndTime();
+
+            if (ftime.equals(fromTime) || ftime.equals(toTime)) {
+                cond = false;
+            } else if (ttime.equals(fromTime) || ttime.equals(toTime)) {
+                cond = false;
+            } else if (fromTime.isAfter(ftime) && toTime.isBefore(ftime)) {
+                cond = false;
+            } else if (fromTime.isAfter(ttime) && toTime.isBefore(ttime)) {
+                cond = false;
+            }
+
+
+        }
 
 
     /*
@@ -87,5 +116,6 @@ public class BookingServiceImpl implements BookingService {
 
      */
 
-
+        return cond;
+    }
 }

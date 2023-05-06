@@ -149,6 +149,7 @@ public class BikeServiceImpl implements BikeService {
 //    }
 
 
+/*
     public List<Bike> getAllAvailableVehicles(List<Bike>bikes,LocalDateTime fromTime,LocalDateTime toTime){
         List<Booking> bookings=bookingRepository.findAll();
         boolean cond=true;
@@ -179,6 +180,8 @@ public class BikeServiceImpl implements BikeService {
         }
             return  bikes;
     }
+
+ */
 
 
 
