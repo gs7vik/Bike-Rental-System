@@ -42,7 +42,7 @@ public class BikeServiceImpl implements BikeService {
 
     //Get the bikes added by a particular Vendor
     public List<BikeOutDto> getBikesByVendor(Long id) {
-        List<Bike> vendorBikes=bikeRepository.findByUserIdId(id);
+        List<Bike> vendorBikes=bikeRepository.findByVendorIdId(id);
         List<BikeOutDto> bikes;
         bikes= vendorBikes.stream().map(vendorBike1->modelMapper.map(vendorBike1,BikeOutDto.class)).collect(Collectors.toList());
         return bikes;
@@ -71,8 +71,8 @@ public class BikeServiceImpl implements BikeService {
     //Add a new bike to Database
     public BikeOutDto addBike(BikeInDto bikeDetails) {
         Bike bikenotes=modelMapper.map(bikeDetails, Bike.class);
-        User user=userRepository.findById(bikeDetails.getUserId()).orElseThrow(()->new RuntimeException());
-        bikenotes.setUserId(user);
+        User user=userRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
+        bikenotes.setVendorId(user);
         bikeRepository.save(bikenotes);
         return modelMapper.map(bikenotes, BikeOutDto.class);
     }

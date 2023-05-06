@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface BikeRepository extends JpaRepository<Bike,Long> {
 
-    List<Bike> findByUserIdId(Long id);
+    List<Bike> findByVendorIdId(Long id);
 
     List<Bike> findByBikeStatus(BikeStatus bikeStatus);
 }

@@ -46,7 +46,7 @@ public class Bike {
 
     @ManyToOne
     @JoinColumn(name="vendorId",referencedColumnName = "id")
-    private User userId;
+    private User vendorId;
 
 
 //test

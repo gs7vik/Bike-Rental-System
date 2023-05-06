@@ -14,6 +14,5 @@ public class BikeInDto {
     private String bikeNumberPlate;
     private byte[] image;
     private Double pricePerHour;
-//    private Long vendorId;
-    private Long userId;
+    private Long vendorId;
 }
