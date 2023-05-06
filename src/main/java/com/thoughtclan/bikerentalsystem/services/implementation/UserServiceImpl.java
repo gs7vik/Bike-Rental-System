@@ -113,4 +113,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public ResponseEntity<UserOutputDto> updateUser(Long id,UserInputDto input) {
+        User user=modelMapper.map(input,User.class);
+        User existingUser=userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No user with such id"));
+        modelMapper.map(user,existingUser);
+        existingUser=userRepository.save(existingUser);
+        return ResponseEntity.ok(modelMapper.map(existingUser,UserOutputDto.class));
+    }
+
 }

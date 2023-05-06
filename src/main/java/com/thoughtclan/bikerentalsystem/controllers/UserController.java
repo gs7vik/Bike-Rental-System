@@ -35,6 +35,12 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @PutMapping("/updateUser/{id}")
+    public ResponseEntity<UserOutputDto> updateUser(@PathVariable Long id,@RequestBody UserInputDto input){
+       return userService.updateUser(id,input);
+    }
+
+
     @PostMapping("/login")
     public LoginOutputDto login(@RequestBody LoginInputDto input){
         return userService.login(input);
