@@ -8,9 +8,11 @@ import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
+import com.thoughtclan.bikerentalsystem.models.User;
 import com.thoughtclan.bikerentalsystem.models.Vendor;
 import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
 import com.thoughtclan.bikerentalsystem.repositories.BookingRepository;
+import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
 import com.thoughtclan.bikerentalsystem.repositories.VendorRepository;
 import com.thoughtclan.bikerentalsystem.services.BikeService;
 import com.thoughtclan.bikerentalsystem.utils.PatchMapper;
@@ -32,6 +34,7 @@ public class BikeServiceImpl implements BikeService {
 
     private final PatchMapper patchMapper;
     private final BikeRepository bikeRepository;
+    private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
 
     private final BookingRepository bookingRepository;
@@ -68,8 +71,8 @@ public class BikeServiceImpl implements BikeService {
     //Add a new bike to Database
     public BikeOutDto addBike(BikeInDto bikeDetails) {
         Bike bikenotes=modelMapper.map(bikeDetails, Bike.class);
-        Vendor vendor=vendorRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
-        bikenotes.setVendorId(vendor);
+        User user=userRepository.findById(bikeDetails.getVendorId()).orElseThrow(()->new RuntimeException());
+        bikenotes.setVendorId(user);
         bikeRepository.save(bikenotes);
         return modelMapper.map(bikenotes, BikeOutDto.class);
     }

@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
     private final PatchMapper patchMapper;
 
 
-
     private final RoleRepository roleRepository;
 
     private final FireBaseService fireBaseService;
@@ -56,6 +55,9 @@ public class UserServiceImpl implements UserService {
     public User getByFireBaseId(String uid){
         return userRepository.findByFireBaseId(uid).orElseThrow(()-> new EntityNotFoundException("firebase id not found"));
     }
+
+
+
     public UserOutputDto saveUser(UserInputDto user) {
 
         User user1 = modelMapper.map(user, User.class);
@@ -63,19 +65,13 @@ public class UserServiceImpl implements UserService {
         userInput.setEmail(user1.getEmail());
         userInput.setPassword(user1.getPassword());
         userInput.setName(user.getFirstName());
-
-
         UserRecord userRecord = fireBaseService.createInFireBase(userInput);
         user1.setFireBaseId(userRecord.getUid());
-
-
-
-
         Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         user1.setRole(role);
 
-
         user1 = userRepository.save(user1);
+
         UserOutputDto user3 =  modelMapper.map(user1, UserOutputDto.class);
         return user3;
     }
@@ -115,6 +111,15 @@ public class UserServiceImpl implements UserService {
     public UserOutputDto userMe(){
         return modelMapper.map(CurrentUser.get(),UserOutputDto.class);
 
+    }
+
+    @Override
+    public ResponseEntity<UserOutputDto> updateUser(Long id,UserInputDto input) {
+        User user=modelMapper.map(input,User.class);
+        User existingUser=userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No user with such id"));
+        modelMapper.map(user,existingUser);
+        existingUser=userRepository.save(existingUser);
+        return ResponseEntity.ok(modelMapper.map(existingUser,UserOutputDto.class));
     }
 
 }
