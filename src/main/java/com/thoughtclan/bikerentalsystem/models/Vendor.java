@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Entity
 @Data
-//@Table(name="vendor", uniqueConstraints = @UniqueConstraint(columnNames ={ "email","contactNo"}))
 public class Vendor {
 
     @Id

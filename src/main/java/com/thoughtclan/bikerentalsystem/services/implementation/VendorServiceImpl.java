@@ -39,15 +39,10 @@ public class VendorServiceImpl implements VendorService {
         else if(!existingvendors1.isEmpty()){
             throw new DuplicateException("User already exists with same contact Number");
         }
+
         vendor1= vendorRepository.save(vendor1);
         return modelMapper.map(vendor1,VendorOutDto.class);
-//                List<Vendor> vendor1=vendorRepository.findAll();
 
-//        vendor1.forEach(e ->{
-//            if(e.equals(vendor))
-//                return new ResponseEntity<String>("User already registered", HttpStatusCode.valueOf(201));
-//        });
-//       return ResponseEntity.ok("user created",HttpStatusCode.valueOf(200));
     }
 
     @Override
