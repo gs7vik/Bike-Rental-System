@@ -100,7 +100,7 @@ public class BikeServiceImpl implements BikeService {
         Bike bike=bikeRepository.findById(bikeId).orElseThrow(()->new EntityNotFoundException("No bike found"));
         List<Booking> bookings=bookingRepository.findByIdAndBookingStatus(bikeId, BookingStatus.BOOKED);
         if(!bookings.isEmpty()) {
-            bike.setBikeStatus(BikeStatus.UNDER_BOOKING);
+            bike.setBikeStatus(BikeStatus.BOOKED);
         }
         bikeRepository.save(bike);
     }
