@@ -14,13 +14,12 @@ public class UserOutputDto {
 
 
     private String firstName;
-
-
     private String lastName;
     private Date dob;
     private String email;
     private String contactNo;
     private String password;
+    private String aadharNo;
     private String firebaseId;
     private String licenseNo;
     private Long roleId;

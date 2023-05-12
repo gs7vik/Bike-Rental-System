@@ -39,7 +39,7 @@ public class User {
     @Column
     private String lastName;
 
-    @Column
+    @Column(unique = true)
     @Email
     private String email;
 
@@ -52,10 +52,13 @@ public class User {
     @Column
     private Date dob;
 
-    @Column
+    @Column(unique = true)
     private String licenseNo;
 
-    @Column
+    @Column(unique = true)
+    private String AadharNo;
+
+    @Column(unique = true)
     private String contactNo;
 
     @ManyToOne

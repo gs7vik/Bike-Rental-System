@@ -21,16 +21,15 @@ public class UserInputDto {
 
     private String email;
 
-
-
     private String password;
-
 
 
     private Date dob;
 
+    private String aadharNo;
 
     private String licenseNo;
+    private String firebaseId;
 
 
     private String contactNo;
