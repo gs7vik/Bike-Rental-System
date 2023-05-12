@@ -47,7 +47,9 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public UserOutputDto userMe(){return userService.userMe();}
+    public UserOutputDto userMe(){
+        return userService.userMe();}
+
 
     @GetMapping("/userBookings/{id}")
     public List<BookingOutputDto> getUserBookings(@PathVariable Long id){

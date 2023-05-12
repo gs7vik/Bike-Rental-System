@@ -51,8 +51,8 @@ public class BookingController {
     }
     */
     @GetMapping("/isAvailable")
-    public Boolean isBikeAvailable(@RequestParam("sTime") LocalDateTime startTime,
-            @RequestParam("eTime") LocalDateTime endTime,
+    public Boolean isBikeAvailable(@RequestParam("startTime") LocalDateTime startTime,
+            @RequestParam("endTime") LocalDateTime endTime,
             @RequestParam("id") Long id ){
                     return bookingService.isBikeAvailable(startTime,endTime,id);}
 
