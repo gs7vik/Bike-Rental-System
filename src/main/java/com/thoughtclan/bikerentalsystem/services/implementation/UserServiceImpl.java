@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.services.implementation;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +17,11 @@ import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.SignInFireBaseOutput;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
+import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.models.Role;
 import com.thoughtclan.bikerentalsystem.models.User;
+import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
 import com.thoughtclan.bikerentalsystem.repositories.BookingRepository;
 import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
@@ -35,6 +38,8 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.client.RestTemplate;
 
+import static com.thoughtclan.bikerentalsystem.enums.BookingStatus.*;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -47,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     private final ModelMapper modelMapper;
 
-
+    private final BikeRepository bikeRepository;
     private final PatchMapper patchMapper;
     private final BookingRepository bookingRepository;
     private final RoleRepository roleRepository;
@@ -148,9 +153,40 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<BookingOutputDto> getUserBookings(Long id) {
         List<Booking> userBookings=bookingRepository.findByUserId(id);
+
+        for(Booking booking : userBookings){
+            LocalDateTime sTime=booking.getStartTime();
+            LocalDateTime eTime=booking.getEndTime();
+            LocalDateTime currentTime=LocalDateTime.now();
+            if(eTime.isBefore(currentTime)){
+                booking.setBookingStatus(COMPLETED);
+            }
+            else if(sTime.isAfter(currentTime)){
+                booking.setBookingStatus(UPCOMING);
+            }
+            else if(sTime.isBefore(currentTime) && eTime.isAfter(currentTime)){
+                booking.setBookingStatus(ACTIVE);
+            }
+        }
+
+
         List<BookingOutputDto> bookings;
         bookings=userBookings.stream().map(userBookings1->modelMapper.map(userBookings1, BookingOutputDto.class)).collect(Collectors.toList());
         return bookings;
+    }
+
+    @Override
+    public ResponseEntity<UserOutputDto> deleteVendor(Long id) {
+        User user=userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No user with such Id"));
+
+        List<Bike>bikes=bikeRepository.findByVendorIdId(user.getId());
+        for(Bike bike : bikes){
+            bike.setVendorId(null);
+        }
+        bikeRepository.saveAll(bikes);
+        userRepository.deleteById(id);
+
+        return ResponseEntity.ok(modelMapper.map(user,UserOutputDto.class));
     }
 
 }

@@ -55,4 +55,10 @@ public class UserController {
     public List<BookingOutputDto> getUserBookings(@PathVariable Long id){
         return userService.getUserBookings(id);
     }
+
+    @DeleteMapping("/deleteVendor/{id}")
+    ResponseEntity<UserOutputDto> deleteVendor(@PathVariable Long id){
+        return userService.deleteVendor(id);
+    }
+
 }
