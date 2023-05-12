@@ -16,9 +16,11 @@ import com.thoughtclan.bikerentalsystem.dtos.outputDtos.LoginOutputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.SignInFireBaseOutput;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.UserOutputDto;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
+import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
 import com.thoughtclan.bikerentalsystem.models.Role;
 import com.thoughtclan.bikerentalsystem.models.User;
+import com.thoughtclan.bikerentalsystem.repositories.BikeRepository;
 import com.thoughtclan.bikerentalsystem.repositories.BookingRepository;
 import com.thoughtclan.bikerentalsystem.repositories.RoleRepository;
 import com.thoughtclan.bikerentalsystem.repositories.UserRepository;
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     private final ModelMapper modelMapper;
 
-
+    private final BikeRepository bikeRepository;
     private final PatchMapper patchMapper;
     private final BookingRepository bookingRepository;
     private final RoleRepository roleRepository;
@@ -150,6 +152,20 @@ public class UserServiceImpl implements UserService {
         List<BookingOutputDto> bookings;
         bookings=userBookings.stream().map(userBookings1->modelMapper.map(userBookings1, BookingOutputDto.class)).collect(Collectors.toList());
         return bookings;
+    }
+
+    @Override
+    public ResponseEntity<UserOutputDto> deleteVendor(Long id) {
+        User user=userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No user with such Id"));
+
+        List<Bike>bikes=bikeRepository.findByVendorIdId(user.getId());
+        for(Bike bike : bikes){
+            bike.setVendorId(null);
+        }
+        bikeRepository.saveAll(bikes);
+        userRepository.deleteById(id);
+
+        return ResponseEntity.ok(modelMapper.map(user,UserOutputDto.class));
     }
 
 }

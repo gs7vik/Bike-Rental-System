@@ -25,4 +25,6 @@ public interface UserService {
     ResponseEntity<UserOutputDto> updateUser(Long id, UserInputDto input);
 
     List<BookingOutputDto> getUserBookings(Long id);
+
+    ResponseEntity<UserOutputDto> deleteVendor(Long id);
 }
