@@ -2,5 +2,5 @@ package com.thoughtclan.bikerentalsystem.enums;
 
 public enum BookingStatus {
 
-    BOOKED,INPROGRESS, COMPLETED, CANCELLED;
+    BOOKED,ACTIVE, UPCOMING,COMPLETED, CANCELLED;
 }

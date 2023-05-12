@@ -22,6 +22,7 @@ public interface BookingService {
 
     public Boolean isBikeAvailable(LocalDateTime startTime,LocalDateTime endTime,Long id);
 
+
     //public List<BookingOutputDto> getBookingByStatus(BookingStatus bookingStatus);
 
 }

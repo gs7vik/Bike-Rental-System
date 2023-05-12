@@ -1,5 +1,6 @@
 package com.thoughtclan.bikerentalsystem.services.implementation;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.client.RestTemplate;
+
+import static com.thoughtclan.bikerentalsystem.enums.BookingStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -149,6 +152,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<BookingOutputDto> getUserBookings(Long id) {
         List<Booking> userBookings=bookingRepository.findByUserId(id);
+
+        for(Booking booking : userBookings){
+            LocalDateTime sTime=booking.getStartTime();
+            LocalDateTime eTime=booking.getEndTime();
+            LocalDateTime currentTime=LocalDateTime.now();
+            if(eTime.isBefore(currentTime)){
+                booking.setBookingStatus(COMPLETED);
+            }
+            else if(sTime.isAfter(currentTime)){
+                booking.setBookingStatus(UPCOMING);
+            }
+            else if(sTime.isBefore(currentTime) && eTime.isAfter(currentTime)){
+                booking.setBookingStatus(ACTIVE);
+            }
+        }
+
+
         List<BookingOutputDto> bookings;
         bookings=userBookings.stream().map(userBookings1->modelMapper.map(userBookings1, BookingOutputDto.class)).collect(Collectors.toList());
         return bookings;

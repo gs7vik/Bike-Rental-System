@@ -56,13 +56,6 @@ public class BookingController {
             @RequestParam("id") Long id ){
                     return bookingService.isBikeAvailable(startTime,endTime,id);}
 
-
-
-
-
-
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<BookingOutputDto>deleteBookingById(@PathVariable Long id){return bookingService.deleteBooking(id);}
 
