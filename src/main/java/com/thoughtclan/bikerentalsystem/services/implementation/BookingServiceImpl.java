@@ -2,7 +2,6 @@ package com.thoughtclan.bikerentalsystem.services.implementation;
 
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.BookingInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;
-import com.thoughtclan.bikerentalsystem.enums.BookingStatus;
 import com.thoughtclan.bikerentalsystem.exception.EntityNotFoundException;
 import com.thoughtclan.bikerentalsystem.models.Bike;
 import com.thoughtclan.bikerentalsystem.models.Booking;
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.thoughtclan.bikerentalsystem.enums.BookingStatus.*;
+import static com.thoughtclan.bikerentalsystem.enums.BookingStatus.BOOKED;
 
 @Service
 @RequiredArgsConstructor
@@ -55,19 +54,6 @@ public class BookingServiceImpl implements BookingService {
         booking.setTotalPrice(price);
         bikeService.updateBikeStatus(booking.getBike().getId());
 
-//        LocalDateTime sTime=booking.getStartTime();
-//        LocalDateTime eTime=booking.getEndTime();
-//        LocalDateTime currentTime=LocalDateTime.now();
-//        if(eTime.isBefore(currentTime)){
-//            booking.setBookingStatus(COMPLETED);
-//        }
-//        else if(sTime.isAfter(currentTime)){
-//            booking.setBookingStatus(UPCOMING);
-//        }
-//        else if(sTime.isBefore(currentTime) && eTime.isAfter(currentTime)){
-//            booking.setBookingStatus(ACTIVE);
-//        }
-
 
         bookingRepository.save(booking);
         this.modelMapper.map(booking, BookingOutputDto.class);
@@ -100,9 +86,7 @@ public class BookingServiceImpl implements BookingService {
         boolean cond = true;
 
         for (Booking b : booking) {
-                if(b.getBookingStatus()!=BOOKED){
-                    continue;
-                }
+
 
             LocalDateTime ftime = b.getStartTime();
             LocalDateTime ttime = b.getEndTime();
@@ -115,15 +99,16 @@ public class BookingServiceImpl implements BookingService {
                 cond = false;
             } else if (fromTime.isAfter(ttime) && toTime.isBefore(ttime)) {
                 cond = false;
+            } else if (fromTime.isAfter(ftime) && toTime.isBefore(ttime)){
+                cond=false;
             }
+
+
         }
-    /*
-    public List<BookingOutputDto> getBookingByStatus(BookingStatus bookingStatus){
-        List<Booking> booking = bookingRepository.findByBookingStatus(bookingStatus);
-        return booking.stream().map(order->modelMapper.map(order,BookingOutputDto.class)).collect(Collectors.toList());
-    }
-     */
+
+
+
+
         return cond;
     }
-
 }
