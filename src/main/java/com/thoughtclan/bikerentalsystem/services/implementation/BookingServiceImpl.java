@@ -86,9 +86,7 @@ public class BookingServiceImpl implements BookingService {
         boolean cond = true;
 
         for (Booking b : booking) {
-                if(b.getBookingStatus()!=BOOKED){
-                    continue;
-                }
+
 
             LocalDateTime ftime = b.getStartTime();
             LocalDateTime ttime = b.getEndTime();
@@ -101,20 +99,15 @@ public class BookingServiceImpl implements BookingService {
                 cond = false;
             } else if (fromTime.isAfter(ttime) && toTime.isBefore(ttime)) {
                 cond = false;
+            } else if (fromTime.isAfter(ftime) && toTime.isBefore(ttime)){
+                cond=false;
             }
 
 
         }
 
 
-    /*
-    public List<BookingOutputDto> getBookingByStatus(BookingStatus bookingStatus){
-        List<Booking> booking = bookingRepository.findByBookingStatus(bookingStatus);
-        return booking.stream().map(order->modelMapper.map(order,BookingOutputDto.class)).collect(Collectors.toList());
-    }
 
-
-     */
 
         return cond;
     }

@@ -40,9 +40,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        if (request.getHeader(HttpHeaders.AUTHORIZATION) == null) {
-        if(true){
-            filterChain.doFilter(request, response);
+      if (request.getHeader(HttpHeaders.AUTHORIZATION) == null)
+        {
+            filterChain. doFilter(request, response);
         }
         else {
             String token = request.getHeader(HttpHeaders.AUTHORIZATION);
