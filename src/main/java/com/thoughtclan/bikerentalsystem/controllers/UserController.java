@@ -56,9 +56,14 @@ public class UserController {
         return userService.getUserBookings(id);
     }
 
-    @DeleteMapping("/deleteVendor/{id}")
-    ResponseEntity<UserOutputDto> deleteVendor(@PathVariable Long id){
-        return userService.deleteVendor(id);
+    @DeleteMapping("/deleteUser/{id}")
+    ResponseEntity<UserOutputDto> deleteUser(@PathVariable Long id){
+        return userService.deleteUser(id);
+    }
+
+    @GetMapping("/usersList/{roleId}")
+    public List<UserOutputDto> getAllVendors(@PathVariable("roleId") Long roleId){
+        return userService.getAllVendors(roleId);
     }
 
 }

@@ -10,30 +10,15 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class UserInputDto {
-
     private Long id;
-
     private String firstName;
-
-
     private String lastName;
-
-
     private String email;
-
     private String password;
-
-
     private Date dob;
-
     private String aadharNo;
-
     private String licenseNo;
     private String firebaseId;
-
-
     private String contactNo;
-
-
     private Long roleId;
 }
