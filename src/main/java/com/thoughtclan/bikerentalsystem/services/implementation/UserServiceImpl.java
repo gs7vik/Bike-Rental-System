@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UserOutputDto> deleteVendor(Long id) {
+    public ResponseEntity<UserOutputDto> deleteUser(Long id) {
         User user=userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No user with such Id"));
 
         List<Bike>bikes=bikeRepository.findByVendorIdId(user.getId());
@@ -187,6 +187,14 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
 
         return ResponseEntity.ok(modelMapper.map(user,UserOutputDto.class));
+    }
+
+    @Override
+    public List<UserOutputDto> getAllVendors(Long roleId) {
+        List<User> vendors= userRepository.findByRoleId(roleId);
+        List<UserOutputDto> allVendors;
+        allVendors=vendors.stream().map(allVendors1->modelMapper.map(allVendors1, UserOutputDto.class)).collect(Collectors.toList());
+        return allVendors;
     }
 
 }
