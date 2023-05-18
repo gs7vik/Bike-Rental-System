@@ -1,7 +1,6 @@
 package com.thoughtclan.bikerentalsystem.controllers;
 
 
-import com.thoughtclan.bikerentalsystem.dtos.UserRegistrationDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.LoginInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.inputDtos.UserInputDto;
 import com.thoughtclan.bikerentalsystem.dtos.outputDtos.BookingOutputDto;

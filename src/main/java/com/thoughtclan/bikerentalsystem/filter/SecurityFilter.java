@@ -40,7 +40,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-      if (request.getHeader(HttpHeaders.AUTHORIZATION) == null)
+      if (false)
         {
             filterChain. doFilter(request, response);
         }
@@ -85,7 +85,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
     }
     private boolean isPublicApi(String url){
-        final List<String> publicApis = List.of("/user/login","/apiMapping/{id}");
+        final List<String> publicApis = List.of("/user/login","/apiMapping","/roleMapping");
         return publicApis.contains(url);
     }
 }
