@@ -65,6 +65,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                             User user = userService.getByFireBaseId(fireBaseId);
                             CurrentUser.set(user);
                             ApiMappingOutputDto apiMappingOutputDto = apiMappingService.getAllPermissions(method,uri);
+                            System.out.println(apiMappingOutputDto);
                             List<Long> roles = roleMappingService.getRoles(apiMappingOutputDto.getId());
                             if(roles.contains(user.getRole().getId())) {
                                 filterChain.doFilter(request, response);
@@ -85,7 +86,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
     }
     private boolean isPublicApi(String url){
-        final List<String> publicApis = List.of("/user/login","/apiMapping","/roleMapping");
+        final List<String> publicApis = List.of("/user/login","/apiMapping","/roleMapping","/bike","/user");
         return publicApis.contains(url);
     }
 }

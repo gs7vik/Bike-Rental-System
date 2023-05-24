@@ -40,6 +40,11 @@ public class UserController {
        return userService.updateUser(id,input);
     }
 
+    @PatchMapping("/partialUpdate/{id}")
+    public ResponseEntity<UserOutputDto> partialUpdate (@PathVariable Long id,@RequestBody UserInputDto input){
+        return userService.partialUpdate(id,input);
+    }
+
     @PostMapping("/login")
     public LoginOutputDto login(@RequestBody LoginInputDto input){
         return userService.login(input);
@@ -60,9 +65,9 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @GetMapping("/usersList/{roleId}")
-    public List<UserOutputDto> getAllVendors(@PathVariable("roleId") Long roleId){
-        return userService.getAllVendors(roleId);
+    @GetMapping("/usersList/{id}")
+    public List<UserOutputDto> getAllVendors(@PathVariable Long id){
+        return userService.getAllVendors(id);
     }
 
 }

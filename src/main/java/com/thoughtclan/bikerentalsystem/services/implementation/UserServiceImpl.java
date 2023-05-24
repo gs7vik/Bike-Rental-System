@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByFireBaseId(String uid){
+
         return userRepository.findByFireBaseId(uid).orElseThrow(()-> new EntityNotFoundException("firebase id not found"));
     }
 
@@ -191,11 +192,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserOutputDto> getAllVendors(Long roleId) {
-        List<User> vendors= userRepository.findByRoleId(roleId);
+    public List<UserOutputDto> getAllVendors(Long id) {
+        List<User> vendors= userRepository.findByRoleId(id);
         List<UserOutputDto> allVendors;
         allVendors=vendors.stream().map(allVendors1->modelMapper.map(allVendors1, UserOutputDto.class)).collect(Collectors.toList());
         return allVendors;
+    }
+
+    @Override
+    public ResponseEntity<UserOutputDto> partialUpdate(Long id, UserInputDto input) {
+        User newDetails=modelMapper.map(input,User.class);
+        User existingUser=userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User Not found "));
+        patchMapper.map(newDetails,existingUser);
+        existingUser=userRepository.save(existingUser);
+        return ResponseEntity.ok(modelMapper.map(existingUser, UserOutputDto.class));
     }
 
 }

@@ -59,6 +59,7 @@ public class User {
     private String AadharNo;
 
     @Column(unique = true)
+    @Pattern(regexp="^\\+?91?[6789]\\d{9}$")
     private String contactNo;
 
     @ManyToOne
