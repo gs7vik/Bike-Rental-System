@@ -47,6 +47,7 @@ public class RoleMappingServiceImpl implements RoleMappingService {
         for(RoleMapping roleMapping : roleMappings){
             roleIds.add(roleMapping.getRole().getId());
         }
+        System.out.println(roleIds);
         return roleIds;
     }
 }

@@ -86,24 +86,19 @@ public class BookingServiceImpl implements BookingService {
         boolean cond = true;
 
         for (Booking b : booking) {
-
-
             LocalDateTime ftime = b.getStartTime();
             LocalDateTime ttime = b.getEndTime();
-
             if (ftime.equals(fromTime) || ftime.equals(toTime)) {
                 cond = false;
             } else if (ttime.equals(fromTime) || ttime.equals(toTime)) {
                 cond = false;
-            } else if (fromTime.isAfter(ftime) && toTime.isBefore(ftime)) {
+            } else if (fromTime.isAfter(ftime) || toTime.isBefore(ftime)) {
                 cond = false;
-            } else if (fromTime.isAfter(ttime) && toTime.isBefore(ttime)) {
+            } else if (fromTime.isAfter(ttime)  || toTime.isBefore(ttime)) {
                 cond = false;
-            } else if (fromTime.isAfter(ftime) && toTime.isBefore(ttime)){
+            } else if (fromTime.isAfter(ftime) || toTime.isBefore(ttime)){
                 cond=false;
             }
-
-
         }
 
 
